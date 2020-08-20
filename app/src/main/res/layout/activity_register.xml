@@ -43,9 +43,7 @@
                 android:padding="10dp"
                 android:text="Register As a Partner"
                 android:textColor="#000000"
-                android:textSize="25sp">
-
-            </TextView>
+                android:textSize="25sp"/>
 
             <EditText
                 android:id="@+id/reg_name"
@@ -60,9 +58,7 @@
                 android:inputType="textPersonName"
                 android:padding="10dp"
                 android:textColor="#0F1010"
-                android:textColorHint="#676767">
-
-            </EditText>
+                android:textColorHint="#676767"/>
 
             <EditText
                 android:id="@+id/reg_email"
@@ -77,9 +73,7 @@
                 android:fontFamily="@font/roboto"
                 android:padding="10dp"
                 android:textColor="#0F1010"
-                android:textColorHint="#676767">
-
-            </EditText>
+                android:textColorHint="#676767"/>
 
             <EditText
                 android:id="@+id/reg_password"
@@ -94,9 +88,7 @@
                 android:fontFamily="@font/roboto"
                 android:padding="10dp"
                 android:textColor="#0F1010"
-                android:textColorHint="#676767">
-
-            </EditText>
+                android:textColorHint="#676767"/>
 
             <EditText
                 android:id="@+id/reg_mobileNumber"
@@ -112,9 +104,7 @@
                 android:maxLength="10"
                 android:padding="10dp"
                 android:textColor="#0F1010"
-                android:textColorHint="#676767">
-
-            </EditText>
+                android:textColorHint="#676767"/>
 
             <Spinner
                 android:id="@+id/spinner"
@@ -123,9 +113,7 @@
                 android:layout_marginVertical="5dp"
                 android:background="@drawable/edit_text_background"
                 android:scrollIndicators="end"
-                android:tooltipText="Choose City">
-
-            </Spinner>
+                android:tooltipText="Choose City"/>
 
             <ProgressBar
                 android:id="@+id/progressBar"
@@ -146,9 +134,7 @@
                 android:padding="10dp"
                 android:fontFamily="@font/roboto_medium"
                 android:text="Register"
-                android:textColor="#FDFAFA">
-
-            </Button>
+                android:textColor="#FDFAFA"/>
 
             <TextView
                 android:id="@+id/reg_old_user"
@@ -158,9 +144,7 @@
                 android:gravity="center_horizontal"
                 android:text="Already a User?"
                 android:textColor="#1A1A1B"
-                android:textSize="20sp">
-
-            </TextView>
+                android:textSize="20sp"/>
 
         </LinearLayout>
     </ScrollView>

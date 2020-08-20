@@ -31,10 +31,10 @@ public class RegisterActivity extends AppCompatActivity {
     private EditText name;
     private EditText email;
     private EditText password;
-    FirebaseAuth mAuth;
+    private FirebaseAuth mAuth;
     private Button registerButton;
     private Spinner sp;
-    DatabaseReference myRef;
+    private DatabaseReference myRef;
     private EditText mobileNumber;
     private ProgressBar pb;
 
@@ -44,7 +44,7 @@ public class RegisterActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
         mAuth = FirebaseAuth.getInstance();
-        myRef = FirebaseDatabase.getInstance().getReference();
+        myRef = FirebaseDatabase.getInstance().getReference().child("Service_Provider_Database");
         sp = findViewById(R.id.spinner);
         name = findViewById(R.id.reg_name);
         email = findViewById(R.id.reg_email);
@@ -63,7 +63,7 @@ public class RegisterActivity extends AppCompatActivity {
                 String inputEmail = email.getText().toString();
                 String inputPassword = password.getText().toString();
                 String inputMobile = mobileNumber.getText().toString();
-                if (inputName.isEmpty() || inputEmail.isEmpty() || inputPassword.isEmpty() || inputMobile.isEmpty()) {
+                if (inputName.equals("") && inputEmail.equals("") && inputPassword.equals("") && inputMobile.equals("")) {
                     Toast.makeText(RegisterActivity.this, "Fill all the credentials", Toast.LENGTH_SHORT).show();
                 } else if (inputPassword.length() < 6) {
                     password.setError("6 characters required");
@@ -86,7 +86,7 @@ public class RegisterActivity extends AppCompatActivity {
                 map.put("Email", email);
                 map.put("Mobile", mobile);
                 map.put("UserId", mAuth.getCurrentUser().getUid());
-                myRef.child("Partners").child(mAuth.getCurrentUser().getEmail()).setValue(map).addOnCompleteListener(new OnCompleteListener<Void>() {
+                myRef.child("Service_Provider_Database").child(mAuth.getCurrentUser().getUid()).updateChildren(map).addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
                         pb.setVisibility(ProgressBar.GONE);
