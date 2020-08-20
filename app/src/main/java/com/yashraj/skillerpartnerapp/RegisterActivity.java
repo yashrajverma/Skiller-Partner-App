@@ -86,7 +86,7 @@ public class RegisterActivity extends AppCompatActivity {
                 map.put("Email", email);
                 map.put("Mobile", mobile);
                 map.put("UserId", mAuth.getCurrentUser().getUid());
-                myRef.child("Service_Provider_Database").child(mAuth.getCurrentUser().getUid()).updateChildren(map).addOnCompleteListener(new OnCompleteListener<Void>() {
+                myRef.child(mAuth.getCurrentUser().getUid()).updateChildren(map).addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
                         pb.setVisibility(ProgressBar.GONE);
