@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_centerHorizontal="true"
+    android:layout_gravity="center"
+    android:orientation="vertical"
+    tools:context=".RegistrationActivities.PhoneAuthenticationActivity">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="10dp"
+        android:fontFamily="@font/roboto_medium"
+        android:gravity="center"
+        android:text="Code Verification"
+        android:textColor="@color/colorPrimaryDark"
+        android:textSize="30sp">
+
+    </TextView>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="10dp"
+        android:fontFamily="@font/roboto"
+        android:gravity="center"
+        android:text="Enter the code sent to your mobile number "
+        android:textColor="@color/colorPrimaryDark"
+        android:textSize="16sp">
+
+    </TextView>
+
+    <TextView
+        android:id="@+id/phoneNumber"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="10dp"
+        android:fontFamily="@font/roboto_medium"
+        android:gravity="center"
+        android:text="9917068314"
+        android:textColor="#009688"
+        android:textSize="20sp">
+
+    </TextView>
+
+    <com.chaos.view.PinView
+        android:id="@+id/pin"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginHorizontal="20dp"
+        android:layout_marginTop="10dp"
+        android:gravity="center"
+        app:itemCount="6">
+
+    </com.chaos.view.PinView>
+
+    <Button
+        android:id="@+id/verify_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="40dp"
+        android:layout_marginVertical="20dp"
+        android:text="Verify">
+
+    </Button>
+
+
+</LinearLayout>

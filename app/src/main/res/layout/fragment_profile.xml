@@ -3,68 +3,65 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     tools:context=".Fragments.ProfileFragment">
 
     <!-- TODO: Update blank fragment layout -->
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="10dp"
-        android:orientation="vertical">
+        android:layout_height="wrap_content">
 
-        <EditText
-            android:id="@+id/user_name"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginVertical="5dp"
-            android:hint="Ayush Shalya"
-            android:textSize="25sp">
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/profile_image"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_centerVertical="true"
+            android:padding="10dp"
+            android:src="@drawable/ic_account"
+            app:civ_border_color="#EA0D0D"
+            app:civ_border_width="2dp">
 
-        </EditText>
-
-        <ImageView
-            android:layout_width="150dp"
-            android:layout_height="150dp"
-            android:layout_gravity="center"
-            android:background="@drawable/imageview_background"
-            android:elevation="10dp"
-            android:src="@drawable/ic_account">
-
-        </ImageView>
+        </de.hdodenhof.circleimageview.CircleImageView>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginVertical="10dp"
-            android:drawableLeft="@drawable/ic_home"
-            android:drawablePadding="20dp"
-            android:gravity="center"
-            android:hint="LOCATION"
-            android:textSize="20sp">
+            android:id="@+id/profile_name"
+            android:layout_marginTop="10dp"
+            android:layout_toRightOf="@+id/profile_image"
+            android:fontFamily="@font/roboto_medium"
+            android:text="Ayush Shalya"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="16sp">
 
         </TextView>
-    </LinearLayout>
 
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-        <LinearLayout
-            android:layout_width="match_parent"
+        <TextView
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:id="@+id/location"
+            android:layout_below="@+id/profile_name"
+            android:layout_marginVertical="7dp"
+            android:layout_toEndOf="@id/profile_image"
+            android:drawablePadding="10dp"
+            android:drawableLeft="@drawable/ic_home"
+            android:drawableTint="#EF1515"
+            android:text="Fatehabad (Agra)"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="16sp">
 
-            <Button
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:padding="20sp">
-
-            </Button>
+        </TextView>
 
 
-        </LinearLayout>
-    </ScrollView>
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1.1dp"
+        android:background="#B8B1B1">
+
+    </View>
+
+
 </LinearLayout>

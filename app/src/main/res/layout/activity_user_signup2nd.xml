@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="20dp"
+    tools:context=".RegistrationActivities.UserSignup2ndActivity">
+
+    <TextView
+        android:id="@+id/register_title_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/roboto_medium"
+        android:padding="10dp"
+        android:text="Create\nAccount"
+        android:textAllCaps="true"
+        android:textColor="@color/colorPrimaryDark"
+        android:textSize="36sp"
+        android:transitionName="transition_title_text">
+
+    </TextView>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Choose Gender:"
+                android:textColor="@color/colorPrimaryDark"
+                android:textSize="18sp">
+
+            </TextView>
+
+            <RadioGroup
+                android:id="@+id/register_gender"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:orientation="horizontal">
+
+                <RadioButton
+                    android:id="@+id/gender_male"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Male">
+
+                </RadioButton>
+
+                <RadioButton
+                    android:id="@+id/gender_female"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="10dp"
+                    android:text="Female">
+
+                </RadioButton>
+
+                <RadioButton
+                    android:id="@+id/gender_others"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Others">
+
+                </RadioButton>
+            </RadioGroup>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:layout_marginVertical="10dp"
+                android:background="@color/colorPrimaryDark">
+
+            </View>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Select Your Age:"
+                android:textColor="@color/colorPrimaryDark"
+                android:textSize="18sp">
+
+            </TextView>
+
+            <DatePicker
+                android:id="@+id/register_age"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:calendarTextColor="@color/colorPrimaryDark"
+                android:calendarViewShown="false"
+                android:datePickerMode="spinner"
+                android:spinnersShown="true">
+
+            </DatePicker>
+
+
+            <Button
+                android:id="@+id/register_next_button"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:background="@color/colorPrimaryDark"
+                android:elevation="5dp"
+                android:fontFamily="@font/roboto_medium"
+                android:onClick="callNextSignupScreen"
+                android:text="Next"
+                android:transitionName="transition_next_button">
+
+            </Button>
+
+
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>

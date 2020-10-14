@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="20dp"
+    tools:context=".RegistrationActivities.UserSignup3rdActivity">
+
+    <TextView
+        android:id="@+id/register_title_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/roboto_medium"
+        android:padding="10dp"
+        android:text="Create\nAccount"
+        android:textAllCaps="true"
+        android:textColor="@color/colorPrimaryDark"
+        android:textSize="36sp"
+        android:transitionName="transition_title_text">
+
+    </TextView>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="20dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="15dp"
+                android:text="You are a :-"
+                android:textColor="@color/colorPrimaryDark"
+                android:textSize="20sp">
+
+            </TextView>
+
+            <RadioGroup
+                android:id="@+id/register_skill"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <RadioButton
+                    android:id="@+id/painter"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/roboto_medium"
+                    android:text="Painter"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:textSize="18sp">
+
+                </RadioButton>
+
+                <RadioButton
+                    android:id="@+id/plumber"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/roboto_medium"
+                    android:text="Plumber"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:textSize="18sp">
+
+                </RadioButton>
+
+                <RadioButton
+                    android:id="@+id/beauty"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/roboto_medium"
+                    android:text="Beauty &amp; Salon"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:textSize="18sp">
+
+                </RadioButton>
+
+                <RadioButton
+                    android:id="@+id/carpenter"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/roboto_medium"
+                    android:text="Carpenter"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:textSize="18sp">
+
+                </RadioButton>
+
+                <RadioButton
+                    android:id="@+id/electrician"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/roboto_medium"
+                    android:text="Electrician"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:textSize="18sp">
+
+                </RadioButton>
+
+                <RadioButton
+                    android:id="@+id/cleaner"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/roboto_medium"
+                    android:text="Cleaner &amp; Disinfector"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:textSize="18sp">
+
+                </RadioButton>
+
+                <RadioButton
+                    android:id="@+id/other"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/roboto_medium"
+                    android:onClick="callEditText"
+                    android:text="Other"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:textSize="18sp">
+
+                </RadioButton>
+
+
+            </RadioGroup>
+
+            <EditText
+                android:id="@+id/text_skill"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:drawableLeft="@drawable/ic_write"
+                android:drawablePadding="10dp"
+                android:drawableTint="@color/colorPrimaryDark"
+                android:hint="Write your skill"
+                android:textColor="@color/colorPrimaryDark"
+                android:textColorHint="@color/colorPrimaryDark"
+                android:visibility="gone">
+
+            </EditText>
+
+
+            <Button
+                android:id="@+id/register_next_button"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="20dp"
+                android:background="@color/colorPrimaryDark"
+                android:elevation="5dp"
+                android:fontFamily="@font/roboto_medium"
+                android:onClick="callNextSignupScreen"
+                android:text="Register"
+                android:transitionName="transition_next_button">
+
+            </Button>
+
+
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>
