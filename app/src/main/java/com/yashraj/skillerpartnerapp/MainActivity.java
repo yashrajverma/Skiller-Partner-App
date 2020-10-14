@@ -20,7 +20,7 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
+import com.yashraj.skillerpartnerapp.RegistrationActivities.UserSignupActivity;
 
 public class MainActivity extends AppCompatActivity {
     private EditText email;
@@ -47,7 +47,7 @@ public class MainActivity extends AppCompatActivity {
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
                 mUser = firebaseAuth.getCurrentUser();
                 if (mUser != null) {
-                    Log.d("User loggin in status..............", "User logged in!!");
+                    Log.d("User login in status..............", "User logged in!!");
                     Toast.makeText(MainActivity.this, "Verified User", Toast.LENGTH_SHORT).show();
                     sendUserToMainActivity();
                     finish();
@@ -61,7 +61,7 @@ public class MainActivity extends AppCompatActivity {
         newUser.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, RegisterActivity.class);
+                Intent intent = new Intent(MainActivity.this, UserSignupActivity.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 startActivity(intent);
@@ -78,7 +78,7 @@ public class MainActivity extends AppCompatActivity {
                 String getPassword = password.getText().toString();
                 if (getEmail.isEmpty() && getPassword.length() < 6) {
                     email.setError("Invalid Credentials");
-                    password.setError("Atleast 6 characters Required");
+                    password.setError("At least 6 characters Required");
                     Toast.makeText(MainActivity.this, "Password too short", Toast.LENGTH_SHORT).show();
                     loadingbar.dismiss();
                 } else {
