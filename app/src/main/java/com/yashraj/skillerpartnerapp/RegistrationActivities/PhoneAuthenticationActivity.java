@@ -17,16 +17,15 @@ import com.google.android.gms.tasks.TaskExecutors;
 import com.google.firebase.FirebaseException;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException;
 import com.google.firebase.auth.PhoneAuthCredential;
 import com.google.firebase.auth.PhoneAuthProvider;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.yashraj.skillerpartnerapp.DashBoardActivity;
+import com.yashraj.skillerpartnerapp.Model.NewTask;
 import com.yashraj.skillerpartnerapp.Model.Vendor;
 import com.yashraj.skillerpartnerapp.R;
 
-import java.util.HashMap;
 import java.util.concurrent.TimeUnit;
 
 public class PhoneAuthenticationActivity extends AppCompatActivity {
@@ -34,7 +33,7 @@ public class PhoneAuthenticationActivity extends AppCompatActivity {
     Button verifyPhone;
     PinView pin;
     String codeBySystem;
-    String userName, userEmail, userPassword, userGender, userAge, userOccupation, userPhone;
+    String userName, userEmail, userPassword, userGender, userState, userCity, userOccupation, userPhone;
     private FirebaseAuth mAuth;
     private PhoneAuthProvider.OnVerificationStateChangedCallbacks mCallbacks = new PhoneAuthProvider.OnVerificationStateChangedCallbacks() {
         @Override
@@ -75,7 +74,8 @@ public class PhoneAuthenticationActivity extends AppCompatActivity {
         userEmail = getIntent().getStringExtra("email");
         userPassword = getIntent().getStringExtra("password");
         userGender = getIntent().getStringExtra("gender");
-        userAge = getIntent().getStringExtra("age");
+        userState = getIntent().getStringExtra("state");
+        userCity = getIntent().getStringExtra("city");
         userOccupation = getIntent().getStringExtra("occupation");
         userPhone = getIntent().getStringExtra("phone");
         phoneNumber.setText(userPhone);
@@ -86,6 +86,7 @@ public class PhoneAuthenticationActivity extends AppCompatActivity {
                 String code = pin.getText().toString();
                 if (!code.isEmpty()) {
                     verifyCode(code);
+                    storeNewUserData();
                 }
 
             }
@@ -116,12 +117,9 @@ public class PhoneAuthenticationActivity extends AppCompatActivity {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if (task.isSuccessful()) {
-                    storeNewUserData();    // Method to store the data into the firebase
+                    Toast.makeText(PhoneAuthenticationActivity.this, "Click to verify", Toast.LENGTH_SHORT).show();
+                    // storeNewUserData();    // Method to store the data into the firebase
 
-                } else {
-                    if (task.getException() instanceof FirebaseAuthInvalidCredentialsException) {
-                        Toast.makeText(PhoneAuthenticationActivity.this, "Verification Failed", Toast.LENGTH_SHORT).show();
-                    }
                 }
             }
         });
@@ -132,7 +130,7 @@ public class PhoneAuthenticationActivity extends AppCompatActivity {
     private void storeNewUserData() {
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference reference = database.getReference("Vendors");
-        Vendor addNewUser = new Vendor(userName, userEmail, userPassword, userGender, userAge, userOccupation, userPhone);
+        Vendor addNewUser = new Vendor(userName, userEmail, userPassword, userGender, userState, userCity, userOccupation, userPhone);
         reference.child(mAuth.getCurrentUser().getUid()).setValue(addNewUser).addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
@@ -146,21 +144,15 @@ public class PhoneAuthenticationActivity extends AppCompatActivity {
             }
         });
 
-        // This part to be deleted later.
-        HashMap<String, Object> map = new HashMap<>();
-        map.put("description", "You have got a new work");
-        map.put("location", "Agra");
-        map.put("phoneNo", "9917056564");
-        map.put("charges", "500Rs/day");
-        map.put("duration", "7days");
-
-        DatabaseReference newTask = database.getReference("NewTask");
-        newTask.child(mAuth.getCurrentUser().getUid()).setValue(map);
+        DatabaseReference databaseReference = database.getReference("NewTask");
+        NewTask newTask = new NewTask("New work", "Agra", "9917068314", "600Rs/day", "5days");
+        databaseReference.child(mAuth.getCurrentUser().getProviderId()).setValue(newTask);
 
 
     }
 
-    // Method to send user to Dashboard acivity after OTP verification
+
+    // Method to send user to Dashboard activity after OTP verification
     private void sendUserToMainActivity() {
         Intent intent = new Intent(PhoneAuthenticationActivity.this, DashBoardActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);

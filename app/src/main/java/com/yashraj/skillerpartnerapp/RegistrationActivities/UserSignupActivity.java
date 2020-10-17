@@ -23,7 +23,7 @@ public class UserSignupActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_signup);
-        //Hooks for Animation
+        //Hooks for Animation view
         titleText = findViewById(R.id.register_title_text);
         next = findViewById(R.id.register_next_button);
         //Hooks for getting data
