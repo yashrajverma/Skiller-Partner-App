@@ -23,7 +23,9 @@
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:scrollIndicators="none"
+        android:scrollbars="none">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -35,6 +37,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Choose Gender:"
+                android:fontFamily="@font/roboto"
+                android:textFontWeight="700"
                 android:textColor="@color/colorPrimaryDark"
                 android:textSize="18sp">
 
@@ -84,22 +88,85 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Select Your Age:"
+                android:fontFamily="@font/roboto"
+                android:text="Select Your Location:"
+                android:textFontWeight="700"
                 android:textColor="@color/colorPrimaryDark"
                 android:textSize="18sp">
 
             </TextView>
 
-            <DatePicker
-                android:id="@+id/register_age"
+
+            <!--            <EditText-->
+            <!--                android:layout_width="match_parent"-->
+            <!--              android:layout_height="wrap_content"-->
+            <!--              android:background="@drawable/edit_text_background"-->
+            <!--                android:hint="Country"-->
+            <!--                android:inputType="text"-->
+            <!--                android:layout_marginVertical="10dp"-->
+            <!--                android:id="@+id/register_country"-->
+            <!--                android:textColor="@color/colorPrimaryDark"-->
+            <!--                android:drawableLeft="@drawable/ic_location"-->
+            <!--                android:drawableTint="@color/colorPrimaryDark"-->
+            <!--                android:drawablePadding="5dp"-->
+            <!--                android:fontFamily="@font/roboto"-->
+            <!--                android:padding="10dp"/>-->
+            <EditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:calendarTextColor="@color/colorPrimaryDark"
-                android:calendarViewShown="false"
-                android:datePickerMode="spinner"
-                android:spinnersShown="true">
+                android:id="@+id/register_state"
+                android:layout_marginVertical="5dp"
+                android:background="@drawable/edit_text_background"
+                android:drawableLeft="@drawable/ic_location"
+                android:drawablePadding="5dp"
+                android:drawableTint="@color/colorPrimaryDark"
+                android:fontFamily="@font/roboto"
+                android:hint="State"
+                android:inputType="text"
+                android:padding="10dp"
+                android:textColor="@color/colorPrimaryDark" />
 
-            </DatePicker>
+            <EditText
+                android:id="@+id/register_city"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="5dp"
+                android:background="@drawable/edit_text_background"
+                android:drawableLeft="@drawable/ic_location"
+                android:drawablePadding="5dp"
+                android:drawableTint="@color/colorPrimaryDark"
+                android:fontFamily="@font/roboto"
+                android:hint="City"
+                android:inputType="text"
+                android:padding="10dp"
+                android:textColor="@color/colorPrimaryDark" />
+            <!--            <EditText-->
+            <!--                android:layout_width="match_parent"-->
+            <!--                android:layout_height="wrap_content"-->
+            <!--                android:background="@drawable/edit_text_background"-->
+            <!--                android:hint="FullAddress"-->
+            <!--                android:inputType="text"-->
+            <!--                android:layout_marginVertical="5dp"-->
+            <!--                android:id="@+id/register_address_3"-->
+            <!--                android:textColor="@color/colorPrimaryDark"-->
+            <!--                android:drawableLeft="@drawable/ic_location"-->
+            <!--                android:drawableTint="@color/colorPrimaryDark"-->
+            <!--                android:drawablePadding="5dp"-->
+            <!--                android:fontFamily="@font/roboto"-->
+            <!--                android:padding="10dp"/>-->
+
+            <Button
+                android:id="@+id/register_show_location"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:background="@color/colorPrimaryDark"
+                android:elevation="5dp"
+                android:fontFamily="@font/roboto_medium"
+                android:text="Show Location"
+                android:transitionName="transition_next_button">
+
+            </Button>
 
 
             <Button

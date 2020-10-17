@@ -51,9 +51,13 @@
 
     <com.chaos.view.PinView
         android:id="@+id/pin"
+        style="@style/PinWidget.PinView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
+        android:cursorVisible="true"
+        android:inputType="number"
+        app:hideLineWhenFilled="false"
         android:layout_marginHorizontal="20dp"
         android:layout_marginTop="10dp"
         android:gravity="center"

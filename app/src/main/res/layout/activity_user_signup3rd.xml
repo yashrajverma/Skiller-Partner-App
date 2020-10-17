@@ -117,8 +117,29 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/roboto_medium"
-                    android:onClick="callEditText"
                     android:text="Other"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:textSize="18sp">
+
+                </RadioButton>
+
+                <RadioButton
+                    android:id="@+id/ac_repair"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/roboto_medium"
+                    android:text="AC Repair"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:textSize="18sp">
+
+                </RadioButton>
+
+                <RadioButton
+                    android:id="@+id/mechanic"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/roboto_medium"
+                    android:text="Mechanic"
                     android:textColor="@color/colorPrimaryDark"
                     android:textSize="18sp">
 

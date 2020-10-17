@@ -1,25 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:layout_height="wrap_content"
+    android:layout_margin="10dp"
+    android:background="?android:attr/windowBackground"
+    android:elevation="8dp"
+    app:cardCornerRadius="10dp">
 
-    <androidx.cardview.widget.CardView
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="10dp"
-        android:elevation="8dp"
-        app:cardCornerRadius="20dp">
+        android:orientation="vertical"
+        android:padding="10dp">
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:padding="10dp">
-
-            <TextView
-                android:id="@+id/new_task_desc"
+        <TextView
+            android:id="@+id/new_task_desc"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/roboto"
@@ -34,6 +31,7 @@
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
+                android:id="@+id/view_2"
                 android:layout_marginTop="5dp"
                 android:background="@color/background" />
 
@@ -43,7 +41,7 @@
                 android:layout_height="wrap_content"
                 android:drawableLeft="@drawable/ic_location"
                 android:drawablePadding="5dp"
-                android:drawableTint="#A89C9C"
+                android:drawableTint="@color/colorPrimaryDark"
                 android:fontFamily="@font/roboto"
                 android:padding="10dp"
                 android:text="H.no 62, Chauraha Mohalla, Fatehabad,Agra"
@@ -94,7 +92,7 @@
                 android:layout_height="wrap_content"
                 android:drawableLeft="@drawable/ic_money"
                 android:drawablePadding="5dp"
-                android:drawableTint="#A89C9C"
+                android:drawableTint="@color/colorPrimaryDark"
                 android:fontFamily="@font/roboto"
                 android:padding="10dp"
                 android:text="500Rs/day"
@@ -109,7 +107,7 @@
                 android:layout_height="wrap_content"
                 android:drawableLeft="@drawable/ic_duration"
                 android:drawablePadding="5dp"
-                android:drawableTint="#A89C9C"
+                android:drawableTint="@color/colorPrimaryDark"
                 android:fontFamily="@font/roboto"
                 android:padding="10dp"
                 android:text="5-6 days"
@@ -151,11 +149,10 @@
             </LinearLayout>
 
 
-        </LinearLayout>
+    </LinearLayout>
 
-    </androidx.cardview.widget.CardView>
 
-</LinearLayout>
+</androidx.cardview.widget.CardView>
 
 
     <!--    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do -->
