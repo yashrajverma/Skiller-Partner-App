@@ -20,12 +20,11 @@ import java.util.List;
 public class NewTaskAdapter extends RecyclerView.Adapter<NewTaskAdapter.ViewHolder> {
     private Context mContext;
     private List<NewTask> mNewTaskList;
-    private FirebaseUser firebaseUser;
+    FirebaseUser firebaseUser;
 
     public NewTaskAdapter(Context mContext, List<NewTask> mNewTaskList) {
         this.mContext = mContext;
         this.mNewTaskList = mNewTaskList;
-        firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
 
     }
 
@@ -33,12 +32,13 @@ public class NewTaskAdapter extends RecyclerView.Adapter<NewTaskAdapter.ViewHold
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(mContext).inflate(R.layout.adapter_new_task, parent, false);
-        return new NewTaskAdapter.ViewHolder(view);
+        return new ViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        NewTask task = mNewTaskList.get(position);
+        firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
+        final NewTask task = mNewTaskList.get(position);
         holder.description.setText(task.getDescription());
         holder.location.setText(task.getLocation());
         holder.phoneNumber.setText(task.getPhoneNo());
@@ -53,8 +53,9 @@ public class NewTaskAdapter extends RecyclerView.Adapter<NewTaskAdapter.ViewHold
         return mNewTaskList.size();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder {
+    class ViewHolder extends RecyclerView.ViewHolder {
         public TextView description;
+        public View view;
         public TextView location;
         public TextView phoneNumber;
         public TextView call;
@@ -66,8 +67,9 @@ public class NewTaskAdapter extends RecyclerView.Adapter<NewTaskAdapter.ViewHold
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             description = itemView.findViewById(R.id.new_task_desc);
+            view = itemView.findViewById(R.id.view_2);
             location = itemView.findViewById(R.id.location);
-            phoneNumber = itemView.findViewById(R.id.phoneNumber);
+            phoneNumber = itemView.findViewById(R.id.phone_number);
             call = itemView.findViewById(R.id.call_now_btn);
             charges = itemView.findViewById(R.id.charges);
             duration = itemView.findViewById(R.id.duration);

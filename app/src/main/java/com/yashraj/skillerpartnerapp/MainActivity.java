@@ -35,9 +35,9 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        getSupportActionBar().hide();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        getSupportActionBar().hide();
         email = findViewById(R.id.log_email);
         mAuth=FirebaseAuth.getInstance();
         loadingbar=new ProgressDialog(this);
@@ -126,4 +126,5 @@ public class MainActivity extends AppCompatActivity {
         super.onStop();
         mAuth.removeAuthStateListener(authStateListener);
     }
+
 }
