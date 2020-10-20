@@ -93,10 +93,8 @@ public class PhoneAuthenticationActivity extends AppCompatActivity {
                     verifyCode(code);
 //                    storeNewUserData();
                 }
-
             }
         });
-
 
     }
 
@@ -113,8 +111,6 @@ public class PhoneAuthenticationActivity extends AppCompatActivity {
     private void verifyCode(String code) {
         PhoneAuthCredential credential = PhoneAuthProvider.getCredential(codeBySystem, code);
         signInUsingCredential(credential);
-
-
     }
 
     private void signInUsingCredential(PhoneAuthCredential credential) {
