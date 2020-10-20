@@ -17,12 +17,12 @@ import com.google.android.gms.tasks.TaskExecutors;
 import com.google.firebase.FirebaseException;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException;
 import com.google.firebase.auth.PhoneAuthCredential;
 import com.google.firebase.auth.PhoneAuthProvider;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.yashraj.skillerpartnerapp.DashBoardActivity;
-import com.yashraj.skillerpartnerapp.Model.NewTask;
 import com.yashraj.skillerpartnerapp.Model.Vendor;
 import com.yashraj.skillerpartnerapp.R;
 
@@ -35,6 +35,9 @@ public class PhoneAuthenticationActivity extends AppCompatActivity {
     String codeBySystem;
     String userName, userEmail, userPassword, userGender, userState, userCity, userOccupation, userPhone;
     private FirebaseAuth mAuth;
+
+
+    //// Callbacks Method
     private PhoneAuthProvider.OnVerificationStateChangedCallbacks mCallbacks = new PhoneAuthProvider.OnVerificationStateChangedCallbacks() {
         @Override
         public void onCodeSent(@NonNull String s, @NonNull PhoneAuthProvider.ForceResendingToken forceResendingToken) {
@@ -64,11 +67,13 @@ public class PhoneAuthenticationActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_phone_authentication);
-        //hooks
+
+        /////hooks/////
         phoneNumber = findViewById(R.id.phoneNumber);
         verifyPhone = findViewById(R.id.verify_button);
         pin = findViewById(R.id.pin);
         mAuth = FirebaseAuth.getInstance();
+
         //Getting data from the previous activities
         userName = getIntent().getStringExtra("name");
         userEmail = getIntent().getStringExtra("email");
@@ -86,7 +91,7 @@ public class PhoneAuthenticationActivity extends AppCompatActivity {
                 String code = pin.getText().toString();
                 if (!code.isEmpty()) {
                     verifyCode(code);
-                    storeNewUserData();
+//                    storeNewUserData();
                 }
 
             }
@@ -97,11 +102,11 @@ public class PhoneAuthenticationActivity extends AppCompatActivity {
 
     private void sendVerificationCodeToUser(String userPhone) {
         PhoneAuthProvider.getInstance().verifyPhoneNumber(
-                userPhone,        //phoneNumber to verify
-                60,            //Timeout Duration
-                TimeUnit.SECONDS,  //Unit of timeout
+                userPhone,                         //phoneNumber to verify
+                60,                            //Timeout Duration
+                TimeUnit.SECONDS,                //Unit of timeout
                 TaskExecutors.MAIN_THREAD,      //Activity(for callback binding)
-                mCallbacks);      //OnVerificationStateChangedCallbacks
+                mCallbacks);                   //OnVerificationStateChangedCallbacks
 
     }
 
@@ -118,8 +123,12 @@ public class PhoneAuthenticationActivity extends AppCompatActivity {
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if (task.isSuccessful()) {
                     Toast.makeText(PhoneAuthenticationActivity.this, "Click to verify", Toast.LENGTH_SHORT).show();
-                    // storeNewUserData();    // Method to store the data into the firebase
+                    storeNewUserData();    // Method to store the data into the firebase
 
+                } else {
+                    if (task.getException() instanceof FirebaseAuthInvalidCredentialsException) {
+                        Toast.makeText(PhoneAuthenticationActivity.this, task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                    }
                 }
             }
         });
@@ -144,9 +153,9 @@ public class PhoneAuthenticationActivity extends AppCompatActivity {
             }
         });
 
-        DatabaseReference databaseReference = database.getReference("NewTask");
-        NewTask newTask = new NewTask("New work", "Agra", "9917068314", "600Rs/day", "5days");
-        databaseReference.child(mAuth.getCurrentUser().getProviderId()).setValue(newTask);
+//        DatabaseReference databaseReference = database.getReference("NewTask");
+//        NewTask newTask = new NewTask("New work", "Agra", "9917068314", "600Rs/day", "5days");
+//        databaseReference.child(mAuth.getCurrentUser().getProviderId()).setValue(newTask);
 
 
     }
