@@ -23,7 +23,6 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.yashraj.skillerpartnerapp.Adapter.NewTaskAdapter;
-import com.yashraj.skillerpartnerapp.Model.NewTask;
 import com.yashraj.skillerpartnerapp.Model.Task;
 import com.yashraj.skillerpartnerapp.R;
 
@@ -36,9 +35,9 @@ import static android.content.ContentValues.TAG;
 public class NewFragment extends Fragment {
     RecyclerView newTaskRecyclerView;
     NewTaskAdapter newTaskAdapter;
-    List<NewTask> taskList;
+    List<Task> taskList;
     DatabaseReference reference;
-    FirebaseAuth mAuth;
+    FirebaseAuth mAuth=FirebaseAuth.getInstance();;
     FirebaseRecyclerAdapter<Task,TaskViewHolder> firebaseRecyclerAdapter;
     String senderId;
 
@@ -47,16 +46,30 @@ public class NewFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_new, container, false);
+        reference = FirebaseDatabase.getInstance().getReference().child("NewTask").child(mAuth.getCurrentUser().getUid()).child("userId").child("details");
         newTaskRecyclerView = view.findViewById(R.id.new_task);
-//        newTaskRecyclerView.setHasFixedSize(true);
+        newTaskRecyclerView.setHasFixedSize(true);
+
+        taskList = new ArrayList<Task>();
+//        reference.child("details").addListenerForSingleValueEvent(new ValueEventListener() {
+//            @Override
+//            public void onDataChange(@NonNull DataSnapshot snapshot) {
+//                for(DataSnapshot dataSnapshot:snapshot.getChildren()){
+//                    Task task=dataSnapshot.getValue(Task.class);
+//                    taskList.add(task);
+//                }
+//            }
+//
+//            @Override
+//            public void onCancelled(@NonNull DatabaseError error) {
+//
+//            }
+//        });
+        newTaskAdapter = new NewTaskAdapter(getContext(), taskList);
+//        newTaskRecyclerView.setAdapter(newTaskAdapter);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
         newTaskRecyclerView.setLayoutManager(linearLayoutManager);
-        taskList = new ArrayList<>();
-        newTaskAdapter = new NewTaskAdapter(getContext(), taskList);
-        newTaskRecyclerView.setAdapter(newTaskAdapter);
-        mAuth=FirebaseAuth.getInstance();
-        readTasks();
-        reference = FirebaseDatabase.getInstance().getReference().child("NewTask").child(mAuth.getCurrentUser().getUid()).child("userId").child("details");
+
 
         Log.i(TAG, "onCreateView: "+senderId);
         return view;
@@ -97,7 +110,8 @@ public class NewFragment extends Fragment {
                 holder.desc_txtView.setText(task.getUser_desc());
                 holder.phoneNumber_txtView.setText(task.getUser_mobile());
                 holder.location_txtView.setText(task.getUser_address() + task.getUser_city());
-                holder.duration_txtView.setText(task.getDuration());
+                holder.duration_txtView.setText(task.getUser_duration());
+
             }
 
             @NonNull
@@ -107,23 +121,46 @@ public class NewFragment extends Fragment {
                 return new TaskViewHolder(view);
             }
         };
+        firebaseRecyclerAdapter.startListening();
+        newTaskRecyclerView.setAdapter(firebaseRecyclerAdapter);
 
     }
 
     private static class TaskViewHolder extends RecyclerView.ViewHolder{
         Button accept_btn,decline_btn;
-        TextView location_txtView,charges_txtView,duration_txtView,desc_txtView,call_now_textview,phoneNumber_txtView;
+        private TextView location_txtView,charges_txtView,duration_txtView,desc_txtView,call_now_textview,phoneNumber_txtView;
         public TaskViewHolder(@NonNull View itemView) {
             super(itemView);
-            location_txtView=itemView.findViewById(R.id.location);
-            charges_txtView=itemView.findViewById(R.id.charges);
-            duration_txtView=itemView.findViewById(R.id.duration);
+            location_txtView=itemView.findViewById(R.id.new_task_location);
+            charges_txtView=itemView.findViewById(R.id.new_task_charges);
+            duration_txtView=itemView.findViewById(R.id.new_task_duration);
             desc_txtView=itemView.findViewById(R.id.new_task_desc);
             call_now_textview=itemView.findViewById(R.id.call_now_btn);
-            phoneNumber_txtView=itemView.findViewById(R.id.phone_number);
+            phoneNumber_txtView=itemView.findViewById(R.id.new_task_phone_number);
             accept_btn=itemView.findViewById(R.id.accept_btn);
             decline_btn=itemView.findViewById(R.id.decline_btn);
 
+            accept_btn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    acceptWork();
+                }
+            });
+
+            decline_btn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    declineWork();
+                }
+            });
+
         }
+    }
+
+    private static void acceptWork(){
+
+    }
+    private static void declineWork(){
+
     }
 }

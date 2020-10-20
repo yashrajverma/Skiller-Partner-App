@@ -6,19 +6,29 @@ public class Task {
     String user_address;
     String user_mobile;
     String user_desc;
-    String duration;
-
+    String user_duration;
+    String userid;
 
     public Task(){}
 
-    public Task(String user_name, String user_city, String user_address, String user_mobile,String user_desc,String duration) {
+    public Task(String user_address,String user_city,String user_desc,String user_duration,String user_mobile,String user_name,String userid) {
         this.user_name = user_name;
         this.user_city = user_city;
         this.user_address = user_address;
         this.user_mobile = user_mobile;
         this.user_desc=user_desc;
-        this.duration=duration;
+        this.user_duration = user_duration;
+        this.userid = userid;
     }
+
+    public String getUserid() {
+        return userid;
+    }
+
+    public void setUserid(String userid) {
+        this.userid = userid;
+    }
+
     public String getUser_name() {
         return user_name;
     }
@@ -27,12 +37,12 @@ public class Task {
         this.user_name = user_name;
     }
 
-    public String getDuration() {
-        return duration;
+    public String getUser_duration() {
+        return user_duration;
     }
 
-    public void setDuration(String duration) {
-        this.duration = duration;
+    public void setUser_duration(String user_duration) {
+        this.user_duration = user_duration;
     }
 
     public String getUser_desc() {

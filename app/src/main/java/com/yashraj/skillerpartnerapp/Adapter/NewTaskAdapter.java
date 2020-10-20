@@ -13,16 +13,18 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.yashraj.skillerpartnerapp.Model.NewTask;
+import com.yashraj.skillerpartnerapp.Model.Task;
 import com.yashraj.skillerpartnerapp.R;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class NewTaskAdapter extends RecyclerView.Adapter<NewTaskAdapter.ViewHolder> {
     private Context mContext;
-    private List<NewTask> mNewTaskList;
+    private List<Task> mNewTaskList=new ArrayList<>();
     FirebaseUser firebaseUser;
 
-    public NewTaskAdapter(Context mContext, List<NewTask> mNewTaskList) {
+    public NewTaskAdapter(Context mContext, List<Task> mNewTaskList) {
         this.mContext = mContext;
         this.mNewTaskList = mNewTaskList;
 
@@ -38,12 +40,12 @@ public class NewTaskAdapter extends RecyclerView.Adapter<NewTaskAdapter.ViewHold
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
-        final NewTask task = mNewTaskList.get(position);
-        holder.description.setText(task.getDescription());
-        holder.location.setText(task.getLocation());
-        holder.phoneNumber.setText(task.getPhoneNo());
-        holder.charges.setText(task.getCharges());
-        holder.duration.setText(task.getDuration());
+        final Task task = mNewTaskList.get(position);
+        holder.description.setText(task.getUser_desc());
+        holder.location.setText(task.getUser_address());
+        holder.phoneNumber.setText(task.getUser_mobile());
+        holder.charges.setText(task.getUser_duration());
+        holder.duration.setText(task.getUser_duration());
 
 
     }
@@ -54,25 +56,25 @@ public class NewTaskAdapter extends RecyclerView.Adapter<NewTaskAdapter.ViewHold
     }
 
     class ViewHolder extends RecyclerView.ViewHolder {
-        public TextView description;
-        public View view;
-        public TextView location;
-        public TextView phoneNumber;
-        public TextView call;
-        public TextView charges;
-        public TextView duration;
-        public Button acceptButton;
-        public Button declineButton;
+        private TextView description;
+        private View view;
+        private TextView location;
+        private TextView phoneNumber;
+        private TextView call;
+        private TextView charges;
+        private TextView duration;
+        private Button acceptButton;
+        private Button declineButton;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             description = itemView.findViewById(R.id.new_task_desc);
             view = itemView.findViewById(R.id.view_2);
-            location = itemView.findViewById(R.id.location);
-            phoneNumber = itemView.findViewById(R.id.phone_number);
+            location = itemView.findViewById(R.id.new_task_location);
+            phoneNumber = itemView.findViewById(R.id.new_task_phone_number);
             call = itemView.findViewById(R.id.call_now_btn);
-            charges = itemView.findViewById(R.id.charges);
-            duration = itemView.findViewById(R.id.duration);
+            charges = itemView.findViewById(R.id.new_task_charges);
+            duration = itemView.findViewById(R.id.new_task_duration);
             acceptButton = itemView.findViewById(R.id.accept_btn);
             declineButton = itemView.findViewById(R.id.decline_btn);
 
