@@ -1,17 +1,18 @@
 package com.yashraj.skillerpartnerapp.Model;
 
 public class Task {
-    String user_name;
-    String user_city;
-    String user_address;
-    String user_mobile;
-    String user_desc;
-    String user_duration;
-    String userid;
+    private String user_name;
+    private String user_city;
+    private String user_address;
+    private String user_mobile;
+    private String user_desc;
+    private String user_duration;
+    private String user_charges;
+    private String userid;
 
     public Task(){}
 
-    public Task(String user_address,String user_city,String user_desc,String user_duration,String user_mobile,String user_name,String userid) {
+    public Task(String user_address,String user_city,String user_charges,String user_desc,String user_duration,String user_mobile,String user_name,String userid) {
         this.user_name = user_name;
         this.user_city = user_city;
         this.user_address = user_address;
@@ -19,6 +20,15 @@ public class Task {
         this.user_desc=user_desc;
         this.user_duration = user_duration;
         this.userid = userid;
+        this.user_charges=user_charges;
+    }
+
+    public String getUser_charges() {
+        return user_charges;
+    }
+
+    public void setUser_charges(String user_charges) {
+        this.user_charges = user_charges;
     }
 
     public String getUserid() {
