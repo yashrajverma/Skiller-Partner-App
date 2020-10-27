@@ -1,36 +1,32 @@
 package com.yashraj.skillerpartnerapp.Fragments;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.yashraj.skillerpartnerapp.Adapter.NewTaskAdapter;
-import com.yashraj.skillerpartnerapp.Model.Task;
+import com.yashraj.skillerpartnerapp.Model.NewTask;
 import com.yashraj.skillerpartnerapp.R;
 
 import java.util.ArrayList;
-import java.util.List;
-
-import static android.content.ContentValues.TAG;
 
 public class NewFragment extends Fragment {
     RecyclerView newTaskRecyclerView;
     NewTaskAdapter newTaskAdapter;
-    List<Task> taskList;
-    DatabaseReference reference;
-    FirebaseAuth mAuth=FirebaseAuth.getInstance();
-//    FirebaseRecyclerAdapter<Task,TaskViewHolder> firebaseRecyclerAdapter;
-    FirebaseUser mUser=mAuth.getCurrentUser();
+    ArrayList<NewTask> taskList;
+
+    FirebaseAuth mAuth = FirebaseAuth.getInstance();
 
 
     @Override
@@ -38,43 +34,49 @@ public class NewFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_new, container, false);
-        reference = FirebaseDatabase.getInstance().getReference().child("NewTask").child(mUser.getUid()).child("userId").child("details");
-        Log.i(TAG, "onCreateView: USERID of Vendor from NewTask Database \t"+mUser.getUid());
-
 
         newTaskRecyclerView = view.findViewById(R.id.new_task);
-        taskList = new ArrayList<Task>();
+        taskList = new ArrayList<>();
         newTaskAdapter = new NewTaskAdapter(getContext(), taskList);
-        //        newTaskRecyclerView.setAdapter(newTaskAdapter);
-
+        newTaskRecyclerView.setAdapter(newTaskAdapter);
         newTaskRecyclerView.setLayoutManager(new LinearLayoutManager(view.getContext()));
+        readTasks();
 
         return view;
     }
 
+
     private void readTasks() {
+        FirebaseDatabase.getInstance().getReference().child("NewTask").child(mAuth.getCurrentUser().getUid()).child("Tasks")
+                .addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        taskList.clear();
+                        for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
+                            NewTask task = dataSnapshot.getValue(NewTask.class);
+                            assert task != null;
+                            if (task.getAccepted().equals("yes")) {
+                                taskList.remove(task);
+                            } else {
+                                taskList.add(task);
+                            }
 
-//        reference.addValueEventListener(new ValueEventListener() {
-//            @Override
-//            public void onDataChange(@NonNull DataSnapshot snapshot) {
-//                taskList.clear();
-//                if(snapshot.exists()){
-//                    for (DataSnapshot datasnapshot : snapshot.getChildren()) {
-//                        NewTask tasks = datasnapshot.getValue(NewTask.class);
-//                        taskList.add(tasks);
-//
-//                    }
-//                }
-//                newTaskAdapter.notifyDataSetChanged();
-//            }
-//
-//            @Override
-//            public void onCancelled(@NonNull DatabaseError error) {
-//
-//            }
-//        });
+                        }
+                        newTaskAdapter.notifyDataSetChanged();
 
+
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+
+                    }
+                });
     }
+
+
+}
+
 
 //    @Override
 //    public void onStart() {
@@ -144,4 +146,4 @@ public class NewFragment extends Fragment {
 //    private static void declineWork(){
 //
 //    }
-}
+

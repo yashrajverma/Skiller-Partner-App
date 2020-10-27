@@ -1,54 +1,86 @@
 package com.yashraj.skillerpartnerapp.Adapter;
 
+import android.annotation.SuppressLint;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.FirebaseDatabase;
 import com.yashraj.skillerpartnerapp.Model.NewTask;
-import com.yashraj.skillerpartnerapp.Model.Task;
 import com.yashraj.skillerpartnerapp.R;
 
 import java.util.ArrayList;
-import java.util.List;
+import java.util.HashMap;
 
 public class NewTaskAdapter extends RecyclerView.Adapter<NewTaskAdapter.ViewHolder> {
-    private Context mContext;
-    private List<Task> mNewTaskList=new ArrayList<>();
+    Context mContext;
+    ArrayList<NewTask> mNewTaskList;
     FirebaseUser firebaseUser;
 
-    public NewTaskAdapter(Context mContext, List<Task> mNewTaskList) {
+    public NewTaskAdapter(Context mContext, ArrayList<NewTask> mNewTaskList) {
         this.mContext = mContext;
         this.mNewTaskList = mNewTaskList;
 
     }
 
     @NonNull
+
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(mContext).inflate(R.layout.adapter_new_task, parent, false);
         return new ViewHolder(view);
     }
 
+    @SuppressLint("SetTextI18n")
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull final ViewHolder holder, int position) {
         firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
-        final Task task = mNewTaskList.get(position);
-        holder.description.setText(task.getUser_desc());
-        holder.location.setText(task.getUser_address());
-        holder.phoneNumber.setText(task.getUser_mobile());
-        holder.charges.setText(task.getUser_duration());
-        holder.duration.setText(task.getUser_duration());
+        final NewTask task = mNewTaskList.get(position);
+        holder.description.setText(task.getDescription());
+        holder.location.setText(task.getLocation());
+        holder.phoneNumber.setText(task.getPhoneNo());
+        holder.charges.setText(task.getCharges() + " Rs/day");
+        holder.duration.setText(task.getDuration() + " days");
+        holder.acceptButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                new AlertDialog.Builder(mContext).setMessage("Are you sure to accept this work?").setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        FirebaseDatabase.getInstance().getReference().child("NewTask").child(firebaseUser.getUid()).child("Tasks").child(task.getWorkId()).child("accepted").setValue("yes");
+                        addOngoingTask(task.getVendorId(), task.getWorkId(), task.getLocation());
+                        Toast.makeText(mContext, "Task Accepted successfully", Toast.LENGTH_SHORT).show();
+                        holder.acceptButton.setText("Accepted");
+
+
+                    }
+                }).setNegativeButton("No", null).show();
+
+            }
+        });
 
 
     }
+
+    private void addOngoingTask(String vendorId, String workId, String location) {
+        HashMap<String, Object> map = new HashMap<>();
+        map.put("workId", workId);
+        map.put("vendorId", vendorId);
+        map.put("location", location);
+        FirebaseDatabase.getInstance().getReference().child("OngoingTask").child(firebaseUser.getUid()).child("Ongoing").child(workId).setValue(map);
+    }
+
 
     @Override
     public int getItemCount() {
@@ -56,15 +88,15 @@ public class NewTaskAdapter extends RecyclerView.Adapter<NewTaskAdapter.ViewHold
     }
 
     class ViewHolder extends RecyclerView.ViewHolder {
-        private TextView description;
-        private View view;
-        private TextView location;
-        private TextView phoneNumber;
-        private TextView call;
-        private TextView charges;
-        private TextView duration;
-        private Button acceptButton;
-        private Button declineButton;
+        TextView description;
+        View view;
+        TextView location;
+        TextView phoneNumber;
+        TextView call;
+        TextView charges;
+        TextView duration;
+        Button acceptButton;
+        Button declineButton;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
