@@ -14,7 +14,6 @@ import android.os.Bundle;
 import android.util.Pair;
 import android.view.View;
 import android.widget.Button;
-import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
@@ -37,7 +36,6 @@ public class UserSignup2ndActivity extends AppCompatActivity implements Location
     EditText state, city;
     RadioButton selectedGender;
     RadioGroup radioGroup;
-    DatePicker agePicker;
     LocationManager locationManager;
     private double latitude;
     private double longitude;
@@ -70,7 +68,6 @@ public class UserSignup2ndActivity extends AppCompatActivity implements Location
         city = findViewById(R.id.register_city);
         showLocation = findViewById(R.id.register_show_location);
         radioGroup = findViewById(R.id.register_gender);
-//        agePicker = findViewById(R.id.register_age);
 
     }
 
