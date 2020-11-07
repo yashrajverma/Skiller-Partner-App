@@ -135,7 +135,7 @@ public class EditProfile extends AppCompatActivity {
                     Toast.makeText(EditProfile.this, "Invalid Password", Toast.LENGTH_SHORT).show();
                 } else {
                     FirebaseDatabase.getInstance().getReference().child("Vendors").child(mUser.getUid()).child("password").setValue(newPassword);
-                    Picasso.get().load(vendor.getImageUrl()).fit().into(image);
+                    Picasso.get().load(vendor.getImageUrl()).placeholder(R.drawable.ic_baseline_account_circle_24).into(image);
                     Toast.makeText(EditProfile.this, "Profile Updated", Toast.LENGTH_SHORT).show();
 
                 }
