@@ -3,9 +3,9 @@
     package="com.yashraj.skillerpartnerapp">
 
     <uses-permission android:name="android.permission.INTERNET" />
-
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
     <application
         android:allowBackup="true"
@@ -14,7 +14,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".RegistrationActivities.PhoneAuthenticationActivity"></activity>
+        <activity android:name=".EditProfile"></activity>
+        <activity android:name=".RegistrationActivities.PhoneAuthenticationActivity" />
         <activity android:name=".RegistrationActivities.UserSignup3rdActivity" />
         <activity android:name=".RegistrationActivities.UserSignup2ndActivity" />
         <activity android:name=".RegistrationActivities.UserSignupActivity" />
