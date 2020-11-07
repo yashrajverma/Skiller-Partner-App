@@ -23,7 +23,6 @@ import java.util.Objects;
 public class MainActivity extends AppCompatActivity {
     EditText phoneNo;
     Button getOTP;
-    Button test;
     TextView newUser;
     CountryCodePicker ccp;
 
@@ -41,7 +40,6 @@ public class MainActivity extends AppCompatActivity {
         ///////// hooks //////////////
 
         phoneNo = findViewById(R.id.log_phone_number);
-        test = findViewById(R.id.btn_skip);
         ccp = findViewById(R.id.ccp);
         getOTP = findViewById(R.id.btn_get_otp);
         newUser = findViewById(R.id.text_new_user);
@@ -64,17 +62,6 @@ public class MainActivity extends AppCompatActivity {
             }
         };
 
-        ////// Test Button (delete it later) ////////
-
-        test.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(MainActivity.this, DashBoardActivity.class));
-                finish();
-            }
-        });
-
-        ////// New user button ////////
 
         newUser.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -93,14 +80,31 @@ public class MainActivity extends AppCompatActivity {
         getOTP.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, UserLoginActivity.class);
-                intent.putExtra("phone", ccp.getFullNumberWithPlus().trim());
-                startActivity(intent);
-                finish();
+                //// To check if phoneNumber is Entered or not
+                if (validatePhone()) {
+                    Intent intent = new Intent(MainActivity.this, UserLoginActivity.class);
+                    intent.putExtra("phone", ccp.getFullNumberWithPlus().trim());
+                    startActivity(intent);
+                    finish();
+                }
+
 
             }
         });
 
+
+    }
+    /////// To validate Mobile Number ////////
+
+    private boolean validatePhone() {
+        String value = phoneNo.getText().toString();
+        if (value.length() < 10) {
+            phoneNo.setError("Invalid Phone Number");
+            return false;
+        } else {
+            phoneNo.setError(null);
+            return true;
+        }
 
     }
 
@@ -114,7 +118,7 @@ public class MainActivity extends AppCompatActivity {
         finish();
     }
 
-
+    ////// To check if user is already signed in //////
     @Override
     protected void onStart() {
         super.onStart();
