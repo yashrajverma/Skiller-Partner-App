@@ -1,27 +1,56 @@
 package com.yashraj.skillerpartnerapp.Model;
 
 public class NewTask {
+    String accepted;
+    String address;
+    long charges;
     String description;
+    String duration;
     String location;
     String phoneNo;
-    String charges;
-    String duration;
+    String user_name;
     String workId;
-    String vendorId;
-    String accepted;
+
 
     public NewTask() {
+
     }
 
-    public NewTask(String description, String location, String phoneNo, String charges, String duration, String workId, String vendorId, String accepted) {
+    public NewTask(String accepted, String address, long charges, String description, String duration, String location, String phoneNo, String user_name, String workId) {
+        this.accepted = accepted;
+        this.address = address;
+        this.charges = charges;
         this.description = description;
+        this.duration = duration;
         this.location = location;
         this.phoneNo = phoneNo;
-        this.charges = charges;
-        this.duration = duration;
+        this.user_name = user_name;
         this.workId = workId;
-        this.vendorId = vendorId;
+    }
+
+    public String getAccepted() {
+        return accepted;
+    }
+
+    public void setAccepted() {
         this.accepted = accepted;
+    }
+
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public long getCharges() {
+        return charges;
+    }
+
+    public void setCharges(long charges) {
+        this.charges = charges;
     }
 
     public String getDescription() {
@@ -30,6 +59,14 @@ public class NewTask {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public String getDuration() {
+        return duration;
+    }
+
+    public void setDuration(String duration) {
+        this.duration = duration;
     }
 
     public String getLocation() {
@@ -48,20 +85,12 @@ public class NewTask {
         this.phoneNo = phoneNo;
     }
 
-    public String getCharges() {
-        return charges;
+    public String getUser_name() {
+        return user_name;
     }
 
-    public void setCharges(String charges) {
-        this.charges = charges;
-    }
-
-    public String getDuration() {
-        return duration;
-    }
-
-    public void setDuration(String duration) {
-        this.duration = duration;
+    public void setUser_name(String user_name) {
+        this.user_name = user_name;
     }
 
     public String getWorkId() {
@@ -70,21 +99,5 @@ public class NewTask {
 
     public void setWorkId(String workId) {
         this.workId = workId;
-    }
-
-    public String getVendorId() {
-        return vendorId;
-    }
-
-    public void setVendorId(String vendorId) {
-        this.vendorId = vendorId;
-    }
-
-    public String getAccepted() {
-        return accepted;
-    }
-
-    public void setAccepted(String accepted) {
-        this.accepted = accepted;
     }
 }

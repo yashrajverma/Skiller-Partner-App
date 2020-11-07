@@ -1,13 +1,13 @@
 package com.yashraj.skillerpartnerapp.Model;
 
 public class Vendor {
-    String Name, Email, Password, Gender, State, City, Occupation, PhoneNo;
+    String Name, Email, Password, Gender, State, City, Occupation, PhoneNo, imageUrl;
 
     public Vendor() {
     }
 
 
-    public Vendor(String name, String email, String password, String gender, String state, String city, String occupation, String phoneNo) {
+    public Vendor(String name, String email, String password, String gender, String state, String city, String occupation, String phoneNo, String imageUrl) {
         Name = name;
         Email = email;
         Password = password;
@@ -16,6 +16,7 @@ public class Vendor {
         City = city;
         Occupation = occupation;
         PhoneNo = phoneNo;
+        this.imageUrl = imageUrl;
     }
 
     public String getName() {
@@ -38,6 +39,18 @@ public class Vendor {
         return Password;
     }
 
+    public void setPassword(String password) {
+        Password = password;
+    }
+
+    public String getGender() {
+        return Gender;
+    }
+
+    public void setGender(String gender) {
+        Gender = gender;
+    }
+
     public String getState() {
         return State;
     }
@@ -54,19 +67,6 @@ public class Vendor {
         City = city;
     }
 
-    public void setPassword(String password) {
-        Password = password;
-    }
-
-    public String getGender() {
-        return Gender;
-    }
-
-    public void setGender(String gender) {
-        Gender = gender;
-    }
-
-
     public String getOccupation() {
         return Occupation;
     }
@@ -81,5 +81,13 @@ public class Vendor {
 
     public void setPhoneNo(String phoneNo) {
         PhoneNo = phoneNo;
+    }
+
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
     }
 }

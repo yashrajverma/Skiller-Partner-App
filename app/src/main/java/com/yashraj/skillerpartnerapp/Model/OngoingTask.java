@@ -2,14 +2,22 @@ package com.yashraj.skillerpartnerapp.Model;
 
 public class OngoingTask {
     String location;
-    String starting_date;
+    String startingDate;
+    String endingDate;
+    String vendorId;
+    String workId;
+    String completed;
 
     public OngoingTask() {
     }
 
-    public OngoingTask(String location, String starting_date) {
+    public OngoingTask(String location, String startingDate, String endingDate, String vendorId, String workId, String completed) {
         this.location = location;
-        this.starting_date = starting_date;
+        this.startingDate = startingDate;
+        this.endingDate = endingDate;
+        this.vendorId = vendorId;
+        this.workId = workId;
+        this.completed = completed;
     }
 
     public String getLocation() {
@@ -20,11 +28,43 @@ public class OngoingTask {
         this.location = location;
     }
 
-    public String getStarting_date() {
-        return starting_date;
+    public String getStartingDate() {
+        return startingDate;
     }
 
-    public void setStarting_date(String starting_date) {
-        this.starting_date = starting_date;
+    public void setStartingDate(String startingDate) {
+        this.startingDate = startingDate;
+    }
+
+    public String getEndingDate() {
+        return endingDate;
+    }
+
+    public void setEndingDate(String endingDate) {
+        this.endingDate = endingDate;
+    }
+
+    public String getVendorId() {
+        return vendorId;
+    }
+
+    public void setVendorId(String vendorId) {
+        this.vendorId = vendorId;
+    }
+
+    public String getWorkId() {
+        return workId;
+    }
+
+    public void setWorkId(String workId) {
+        this.workId = workId;
+    }
+
+    public String getCompleted() {
+        return completed;
+    }
+
+    public void setCompleted(String completed) {
+        this.completed = completed;
     }
 }
