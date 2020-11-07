@@ -1,16 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".Fragments.OngoingFragment">
 
-    <androidx.recyclerview.widget.RecyclerView
+    <TextView
+        android:id="@+id/no_ongoingTask_text"
         android:layout_width="match_parent"
-        android:id="@+id/ongoing_task"
-        android:layout_height="wrap_content">
+        android:layout_height="match_parent"
+        android:layout_gravity="center"
+        android:fontFamily="@font/roboto_medium"
+        android:gravity="center"
+        android:text="You don't have any Ongoing Task\n Please Check New Tasks"
+        android:textColor="@color/colorPrimaryDark"
+        android:textSize="20sp"
+        android:visibility="gone" />
 
-    </androidx.recyclerview.widget.RecyclerView>
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/ongoing_task"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+        </androidx.recyclerview.widget.RecyclerView>
+
+    </ScrollView>
 
 
-</ScrollView>
+</LinearLayout>

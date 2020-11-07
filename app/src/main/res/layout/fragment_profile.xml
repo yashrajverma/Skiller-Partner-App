@@ -3,71 +3,112 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/skiller_profile_bg"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     tools:context=".Fragments.ProfileFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+    <androidx.cardview.widget.CardView
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="115dp"
+        android:background="?android:attr/windowBackground"
+        android:elevation="8dp"
+        app:cardCornerRadius="100dp">
 
         <de.hdodenhof.circleimageview.CircleImageView
-            android:id="@+id/profile_image"
-            android:layout_width="80dp"
-            android:layout_height="80dp"
-            android:layout_centerVertical="true"
-            android:padding="10dp"
-            android:src="@drawable/ic_account"
-            app:civ_border_color="#EA0D0D"
-            app:civ_border_width="2dp">
+            android:id="@+id/user_profile_image"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:src="@drawable/ic_baseline_account_circle_24">
 
         </de.hdodenhof.circleimageview.CircleImageView>
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/profile_name"
-            android:layout_marginTop="10dp"
-            android:layout_toRightOf="@+id/profile_image"
-            android:fontFamily="@font/roboto_medium"
-            android:text="Ayush Shalya"
-            android:textColor="@color/colorPrimaryDark"
-            android:textSize="16sp">
 
-        </TextView>
+    </androidx.cardview.widget.CardView>
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/location"
-            android:layout_below="@+id/profile_name"
-            android:layout_marginVertical="7dp"
-            android:layout_toEndOf="@id/profile_image"
-            android:drawablePadding="10dp"
-            android:drawableLeft="@drawable/ic_home"
-            android:drawableTint="#EF1515"
-            android:text="Fatehabad (Agra)"
-            android:textColor="@color/colorPrimaryDark"
-            android:textSize="16sp">
-
-        </TextView>
-
-
-    </RelativeLayout>
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1.1dp"
-        android:background="#B8B1B1">
-
-    </View>
-    <Button
-        android:id="@+id/logout_button"
+    <TextView
+        android:id="@+id/user_profile_edit"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="10dp"
+        android:drawableEnd="@drawable/ic_write"
+        android:drawablePadding="10dp"
+        android:drawableTint="@color/colorPrimary"
+        android:fontFamily="@font/roboto"
+        android:gravity="center"
+        android:text="Edit Profile"
+        android:textColor="@color/colorPrimaryDark"
+        android:textSize="18sp" />
+
+    <View
+        android:id="@+id/single_line"
+        android:layout_width="match_parent"
+        android:layout_height="0.8dp"
+        android:layout_marginTop="8dp"
+        android:background="#FDB1AAAA" />
+
+    <TextView
+        android:id="@+id/user_work_history"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:layout_marginVertical="10dp"
+        android:drawableLeft="@drawable/ic_work"
+        android:drawablePadding="10dp"
+        android:drawableTint="@color/colorPrimaryDark"
+        android:fontFamily="@font/roboto_medium"
+        android:gravity="center_vertical"
+        android:padding="10dp"
+        android:text="Work History"
+        android:textColor="@color/colorPrimaryDark"
+        android:textSize="16sp" />
+
+    <TextView
+        android:id="@+id/user_share"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:layout_marginVertical="10dp"
+        android:drawableLeft="@drawable/ic_share"
+        android:drawablePadding="10dp"
+        android:drawableTint="@color/colorPrimaryDark"
+        android:fontFamily="@font/roboto_medium"
+        android:gravity="center_vertical"
+        android:padding="10dp"
+        android:text="Share App"
+        android:textColor="@color/colorPrimaryDark"
+        android:textSize="16sp" />
+
+
+    <TextView
+        android:id="@+id/user_rate_app"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:layout_marginVertical="10dp"
+        android:drawableLeft="@drawable/ic_rate"
+        android:drawablePadding="10dp"
+        android:drawableTint="@color/colorPrimaryDark"
+        android:fontFamily="@font/roboto_medium"
+        android:gravity="center_vertical"
+        android:padding="10dp"
+        android:text="Rate the App"
+        android:textColor="@color/colorPrimaryDark"
+        android:textSize="16sp" />
+
+
+    <Button
+        android:id="@+id/logout_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="30dp"
+        android:layout_marginVertical="10dp"
+        android:padding="10dp"
         android:text="Logout"
-        android:layout_gravity="center"/>
+        android:layout_gravity="center" />
 
 
 </LinearLayout>

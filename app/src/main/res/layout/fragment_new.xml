@@ -6,6 +6,18 @@
     android:orientation="vertical"
     tools:context=".Fragments.NewFragment">
 
+    <TextView
+        android:id="@+id/no_task_text"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="center"
+        android:fontFamily="@font/roboto_medium"
+        android:gravity="center"
+        android:text="You don't have any task right now"
+        android:textColor="@color/colorPrimaryDark"
+        android:textSize="20sp"
+        android:visibility="gone" />
+
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
