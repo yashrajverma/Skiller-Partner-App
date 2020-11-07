@@ -31,8 +31,10 @@
             android:id="@+id/ongoing_task_location"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:drawableLeft="@drawable/ic_location"
-            android:text="Indraprastha, New Delhi" />
+            android:layout_marginVertical="5dp"
+            android:drawableTint="@color/colorPrimaryDark"
+            app:drawableStartCompat="@drawable/ic_location" />
+
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -53,9 +55,9 @@
                 android:id="@+id/starting_date"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:layout_toEndOf="@+id/started_on"
-                android:hint="22-oct-20" />
+                android:layout_marginStart="10dp"
+                android:layout_toEndOf="@+id/started_on" />
+
 
         </RelativeLayout>
 
@@ -68,15 +70,35 @@
 
         </View>
 
-        <Button
-            android:id="@+id/mark_as_complete_btn"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:text="Mark as complete"
-            android:textAllCaps="false">
+            android:orientation="horizontal"
+            android:weightSum="2">
 
-        </Button>
+            <Button
+                android:id="@+id/choose_date"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="5dp"
+                android:layout_marginVertical="10dp"
+                android:layout_weight="1"
+                android:text="Select Ending Date"
+                android:textAllCaps="false" />
+
+
+            <Button
+                android:id="@+id/mark_as_complete_btn"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="5dp"
+                android:layout_marginVertical="10dp"
+                android:layout_weight="1"
+                android:text="Mark as complete"
+                android:textAllCaps="false" />
+
+
+        </LinearLayout>
 
 
     </LinearLayout>

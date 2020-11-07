@@ -13,17 +13,17 @@
         android:orientation="vertical"
         android:padding="10dp">
 
+        <!--Work Location from firebase-->
         <TextView
             android:id="@+id/c_location"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:drawableLeft="@drawable/ic_location"
             android:drawablePadding="5dp"
-            android:drawableTint="@color/colorPrimaryDark"
             android:fontFamily="@font/roboto"
-            android:hint="Mayur Vihar,Agra"
             android:textColorHint="@color/colorPrimaryDark"
-            android:textSize="16sp">
+            android:textSize="16sp"
+            app:drawableStartCompat="@drawable/ic_location"
+            app:drawableTint="@color/colorPrimaryDark">
 
         </TextView>
 
@@ -44,20 +44,20 @@
 
             </TextView>
 
+            <!--Starting Date from firebase-->
             <TextView
                 android:id="@+id/c_starting_date"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
+                android:layout_marginStart="10dp"
                 android:layout_toEndOf="@+id/c_started_on"
-                android:hint="22-oct-20"
                 android:textColorHint="@color/colorPrimaryDark" />
 
             <TextView
                 android:id="@+id/c_ended_on"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="20dp"
+                android:layout_marginStart="20dp"
                 android:layout_toEndOf="@id/c_starting_date"
                 android:fontFamily="@font/roboto_medium"
                 android:text="Ended on:"
@@ -67,42 +67,41 @@
 
             </TextView>
 
+            <!--Ending Date from firebase-->
             <TextView
                 android:id="@+id/c_ending_date"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
+                android:layout_marginStart="10dp"
                 android:layout_toEndOf="@+id/c_ended_on"
-                android:hint="25-oct-20"
                 android:textColorHint="@color/colorPrimaryDark" />
 
-            <TextView
-                android:id="@+id/c_payment_received"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/c_ending_date"
-                android:layout_centerVertical="true"
-                android:layout_marginTop="10dp"
-                android:fontFamily="@font/roboto_medium"
-                android:text="Payment Received:"
-                android:textColor="@color/colorPrimaryDark"
-                android:textSize="16sp">
+            <!--            <TextView-->
+            <!--                android:id="@+id/c_payment_received"-->
+            <!--                android:layout_width="wrap_content"-->
+            <!--                android:layout_height="wrap_content"-->
+            <!--                android:layout_below="@id/c_ending_date"-->
+            <!--                android:layout_centerVertical="true"-->
+            <!--                android:layout_marginTop="10dp"-->
+            <!--                android:fontFamily="@font/roboto_medium"-->
+            <!--                android:text="Payment Received:"-->
+            <!--                android:textColor="@color/colorPrimaryDark"-->
+            <!--                android:textSize="16sp">-->
 
-            </TextView>
+            <!--            </TextView>-->
 
-            <TextView
-                android:id="@+id/c_amount"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/c_ended_on"
-                android:layout_centerVertical="true"
-                android:layout_marginLeft="10dp"
-                android:layout_marginTop="10dp"
-                android:layout_toRightOf="@+id/c_payment_received"
-                android:hint="Rs.2000"
-                android:text="Rs.2000"
-                android:textColor="@color/colorPrimaryDark"
-                android:textColorHint="@color/colorPrimaryDark" />
+            <!--            <TextView-->
+            <!--                android:id="@+id/c_amount"-->
+            <!--                android:layout_width="wrap_content"-->
+            <!--                android:layout_height="wrap_content"-->
+            <!--                android:layout_below="@id/c_ended_on"-->
+            <!--                android:layout_centerVertical="true"-->
+            <!--                android:layout_marginStart="10dp"-->
+            <!--                android:layout_marginTop="10dp"-->
+            <!--                android:layout_toEndOf="@+id/c_payment_received"-->
+            <!--                android:hint="Rs.2000"-->
+            <!--                android:textColor="@color/colorPrimaryDark"-->
+            <!--                android:textColorHint="@color/colorPrimaryDark" />-->
 
         </RelativeLayout>
 

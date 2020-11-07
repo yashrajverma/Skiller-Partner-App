@@ -21,8 +21,6 @@
             android:layout_height="wrap_content"
             android:fontFamily="@font/roboto"
             android:padding="10dp"
-            android:text="Lorem ipsum dolor sit amit Lorem ipsum dolor sit amet,
-            consectetur adipiscing elit, sed do"
             android:textColor="@color/colorPrimaryDark"
             android:textSize="16sp">
 
@@ -44,7 +42,6 @@
             android:drawableTint="@color/colorPrimaryDark"
             android:fontFamily="@font/roboto"
             android:padding="10dp"
-            android:text="H.no 62, Chauraha Mohalla, Fatehabad,Agra"
             android:textColor="@color/colorPrimaryDark"
             android:textSize="14sp">
 
@@ -63,7 +60,6 @@
                 android:drawableTint="#15ED1D"
                 android:fontFamily="@font/roboto"
                 android:padding="10dp"
-                android:text="9917068314"
                 android:textColor="@color/colorPrimaryDark"
                 android:textSize="14sp">
 
@@ -76,7 +72,7 @@
                 android:layout_alignParentEnd="true"
                 android:layout_centerInParent="true"
                 android:layout_marginEnd="10dp"
-                android:fontFamily="@font/roboto"
+                android:fontFamily="@font/roboto_medium"
                 android:padding="10dp"
                 android:text="Call Now"
                 android:textColor="#2196F3"
@@ -95,7 +91,6 @@
             android:drawableTint="@color/colorPrimaryDark"
             android:fontFamily="@font/roboto"
             android:padding="10dp"
-            android:text="500Rs/day"
             android:textColor="@color/colorPrimaryDark"
             android:textSize="14sp">
 
@@ -110,7 +105,6 @@
             android:drawableTint="@color/colorPrimaryDark"
             android:fontFamily="@font/roboto"
             android:padding="10dp"
-            android:text="5-6 days"
             android:textColor="@color/colorPrimaryDark"
             android:textSize="14sp">
 
@@ -155,9 +149,3 @@
 </androidx.cardview.widget.CardView>
 
 
-    <!--    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do -->
-    <!--    eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, -->
-    <!--    quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. -->
-    <!--    Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu -->
-    <!--    fugiat nulla pariatur. Excepteur sint occaecat-->
-    <!--    cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.-->
