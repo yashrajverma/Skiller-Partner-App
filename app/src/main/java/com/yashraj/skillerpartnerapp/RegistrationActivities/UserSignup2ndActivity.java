@@ -45,8 +45,16 @@ public class UserSignup2ndActivity extends AppCompatActivity implements Location
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_signup2nd);
-        initView();
 
+        //////// Hooks //////////////////
+        titleText = findViewById(R.id.register_title_text);
+        next = findViewById(R.id.register_next_button);
+        state = findViewById(R.id.register_state);
+        city = findViewById(R.id.register_city);
+        showLocation = findViewById(R.id.register_show_location);
+        radioGroup = findViewById(R.id.register_gender);
+
+        ////////// To get User's Location //////////////////////
         showLocation.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -61,27 +69,11 @@ public class UserSignup2ndActivity extends AppCompatActivity implements Location
 
     }
 
-    private void initView() {
-        titleText = findViewById(R.id.register_title_text);
-        next = findViewById(R.id.register_next_button);
-        state = findViewById(R.id.register_state);
-        city = findViewById(R.id.register_city);
-        showLocation = findViewById(R.id.register_show_location);
-        radioGroup = findViewById(R.id.register_gender);
-
-    }
 
     private void detectCurrentLocation() {
-        Toast.makeText(this, "please wait", Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "Please wait", Toast.LENGTH_SHORT).show();
         locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            // TODO: Consider calling
-            //    ActivityCompat#requestPermissions
-            // here to request the missing permissions, and then overriding
-            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-            //                                          int[] grantResults)
-            // to handle the case where the user grants the permission. See the documentation
-            // for ActivityCompat#requestPermissions for more details.
             return;
         }
         locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, this);
@@ -96,7 +88,6 @@ public class UserSignup2ndActivity extends AppCompatActivity implements Location
         String getEmail = getIntent().getStringExtra("email");
         String getPassword = getIntent().getStringExtra("password");
         String getPhone = getIntent().getStringExtra("phone");
-
         selectedGender = findViewById(radioGroup.getCheckedRadioButtonId());
         String getGender = selectedGender.getText().toString();
         String getState = state.getText().toString().trim();

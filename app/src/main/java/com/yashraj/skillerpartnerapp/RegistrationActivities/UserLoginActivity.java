@@ -29,7 +29,9 @@ public class UserLoginActivity extends AppCompatActivity {
     String phoneNumber;
     String codeBySystem;
     FirebaseAuth mAuth;
-    private PhoneAuthProvider.OnVerificationStateChangedCallbacks mCallbacks = new PhoneAuthProvider.OnVerificationStateChangedCallbacks() {
+
+
+    private final PhoneAuthProvider.OnVerificationStateChangedCallbacks mCallbacks = new PhoneAuthProvider.OnVerificationStateChangedCallbacks() {
 
         @Override
         public void onCodeSent(@NonNull String s, @NonNull PhoneAuthProvider.ForceResendingToken forceResendingToken) {
@@ -60,6 +62,7 @@ public class UserLoginActivity extends AppCompatActivity {
         phoneNumber = getIntent().getStringExtra("phone");
 
         sendOTP();
+
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -75,6 +78,7 @@ public class UserLoginActivity extends AppCompatActivity {
         });
     }
 
+    //////////////////////////////////////////////////////////////////////////
     private void sendOTP() {
         PhoneAuthProvider.getInstance().verifyPhoneNumber(
                 phoneNumber,                         //phoneNumber to verify
@@ -84,6 +88,7 @@ public class UserLoginActivity extends AppCompatActivity {
                 mCallbacks);
     }
 
+    /////////////////////////////////////////////////////////////////////////////////////
     private void signInWithPhoneAuthCredential(PhoneAuthCredential phoneAuthCredential) {
         mAuth.signInWithCredential(phoneAuthCredential).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
             @Override
@@ -93,13 +98,14 @@ public class UserLoginActivity extends AppCompatActivity {
 
                 } else {
                     if (task.getException() instanceof FirebaseAuthInvalidCredentialsException) {
-                        Toast.makeText(UserLoginActivity.this, task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(UserLoginActivity.this, "Some Error occurred", Toast.LENGTH_SHORT).show();
                     }
                 }
             }
         });
     }
 
+    ////////////////////////////////////////////////////////////////////////////////////////////
     private void sendUserToMainActivity() {
         Intent intent = new Intent(UserLoginActivity.this, DashBoardActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
@@ -107,4 +113,6 @@ public class UserLoginActivity extends AppCompatActivity {
         startActivity(intent);
         finish();
     }
+
+
 }

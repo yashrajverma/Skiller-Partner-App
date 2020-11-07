@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.util.Pair;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
@@ -21,7 +20,6 @@ public class UserSignup3rdActivity extends AppCompatActivity {
     Button next;
     RadioButton selectedSkill;
     RadioGroup radioGroup;
-    EditText textSkill;
 
 
     @Override
@@ -31,7 +29,7 @@ public class UserSignup3rdActivity extends AppCompatActivity {
         titleText = findViewById(R.id.register_title_text);
         next = findViewById(R.id.register_next_button);
         radioGroup = findViewById(R.id.register_skill);
-        textSkill = findViewById(R.id.text_skill);
+
 
     }
 
@@ -65,25 +63,13 @@ public class UserSignup3rdActivity extends AppCompatActivity {
     }
 
     private boolean validateSkill() {
-//        String skillName = textSkill.getText().toString();
         if (radioGroup.getCheckedRadioButtonId() == -1) {
             Toast.makeText(this, "Nothing has been Selected", Toast.LENGTH_SHORT).show();
             return false;
-        }
-//        else if(skill.equals("Other") && skillName.isEmpty()){
-//            Toast.makeText(this, "Enter your skill", Toast.LENGTH_SHORT).show();
-//            return false;
-//
-//        }
-
-        else {
+        } else {
 
             return true;
         }
     }
 
-//    public void callEditText(View view) {
-//        textSkill.setVisibility(EditText.VISIBLE);
-//        skill = textSkill.getText().toString();
-//    }
 }

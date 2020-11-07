@@ -63,6 +63,16 @@ public class PhoneAuthenticationActivity extends AppCompatActivity {
         }
     };
 
+    private void sendVerificationCodeToUser(String userPhone) {
+        PhoneAuthProvider.getInstance().verifyPhoneNumber(
+                userPhone,                         //phoneNumber to verify
+                60,                            //Timeout Duration
+                TimeUnit.SECONDS,                //Unit of timeout
+                TaskExecutors.MAIN_THREAD,      //Activity(for callback binding)
+                mCallbacks);                   //OnVerificationStateChangedCallbacks
+
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -84,6 +94,7 @@ public class PhoneAuthenticationActivity extends AppCompatActivity {
         userOccupation = getIntent().getStringExtra("occupation");
         userPhone = getIntent().getStringExtra("phone");
         phoneNumber.setText(userPhone);
+
         sendVerificationCodeToUser(userPhone);
         verifyPhone.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -91,27 +102,20 @@ public class PhoneAuthenticationActivity extends AppCompatActivity {
                 String code = pin.getText().toString();
                 if (!code.isEmpty()) {
                     verifyCode(code);
-//                    storeNewUserData();
                 }
             }
         });
 
     }
 
-    private void sendVerificationCodeToUser(String userPhone) {
-        PhoneAuthProvider.getInstance().verifyPhoneNumber(
-                userPhone,                         //phoneNumber to verify
-                60,                            //Timeout Duration
-                TimeUnit.SECONDS,                //Unit of timeout
-                TaskExecutors.MAIN_THREAD,      //Activity(for callback binding)
-                mCallbacks);                   //OnVerificationStateChangedCallbacks
 
-    }
+    ///// Code verification and send user details into the firebase //////
 
     private void verifyCode(String code) {
         PhoneAuthCredential credential = PhoneAuthProvider.getCredential(codeBySystem, code);
         signInUsingCredential(credential);
     }
+
 
     private void signInUsingCredential(PhoneAuthCredential credential) {
         mAuth.signInWithCredential(credential).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
@@ -135,7 +139,7 @@ public class PhoneAuthenticationActivity extends AppCompatActivity {
     private void storeNewUserData() {
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference reference = database.getReference("Vendors");
-        Vendor addNewUser = new Vendor(userName, userEmail, userPassword, userGender, userState, userCity, userOccupation, userPhone);
+        Vendor addNewUser = new Vendor(userName, userEmail, userPassword, userGender, userState, userCity, userOccupation, userPhone, "default");
         reference.child(mAuth.getCurrentUser().getUid()).setValue(addNewUser).addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
@@ -148,10 +152,6 @@ public class PhoneAuthenticationActivity extends AppCompatActivity {
                 }
             }
         });
-
-//        DatabaseReference databaseReference = database.getReference("NewTask");
-//        NewTask newTask = new NewTask("New work", "Agra", "9917068314", "600Rs/day", "5days");
-//        databaseReference.child(mAuth.getCurrentUser().getProviderId()).setValue(newTask);
 
 
     }

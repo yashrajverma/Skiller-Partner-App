@@ -11,11 +11,12 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.material.textfield.TextInputLayout;
+import com.yashraj.skillerpartnerapp.MainActivity;
 import com.yashraj.skillerpartnerapp.R;
 
 public class UserSignupActivity extends AppCompatActivity {
     TextView titleText;
-    Button next;
+    Button next, login;
     TextInputLayout name, email, password, phoneNo;
 
 
@@ -23,17 +24,31 @@ public class UserSignupActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_signup);
+
         //Hooks for Animation view
         titleText = findViewById(R.id.register_title_text);
         next = findViewById(R.id.register_next_button);
+        login = findViewById(R.id.login_btn);
+
         //Hooks for getting data
         name = findViewById(R.id.register_name);
         email = findViewById(R.id.register_email);
         password = findViewById(R.id.register_password);
         phoneNo = findViewById(R.id.register_phone);
 
+        /////// Login Button onClickListener /////////
+
+        login.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(UserSignupActivity.this, MainActivity.class));
+                finish();
+            }
+        });
+
     }
 
+    ///////// Next button onClick Listener //////////
     public void callNextSignupScreen(View view) {
         if (!validateName() | !validateEmail() | !validatePassword() | !validatePhone()) {
             return;

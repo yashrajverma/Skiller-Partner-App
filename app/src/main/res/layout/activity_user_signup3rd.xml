@@ -113,16 +113,6 @@
 
                 </RadioButton>
 
-                <RadioButton
-                    android:id="@+id/other"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/roboto_medium"
-                    android:text="Other"
-                    android:textColor="@color/colorPrimaryDark"
-                    android:textSize="18sp">
-
-                </RadioButton>
 
                 <RadioButton
                     android:id="@+id/ac_repair"
@@ -149,19 +139,7 @@
 
             </RadioGroup>
 
-            <EditText
-                android:id="@+id/text_skill"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:drawableLeft="@drawable/ic_write"
-                android:drawablePadding="10dp"
-                android:drawableTint="@color/colorPrimaryDark"
-                android:hint="Write your skill"
-                android:textColor="@color/colorPrimaryDark"
-                android:textColorHint="@color/colorPrimaryDark"
-                android:visibility="gone">
 
-            </EditText>
 
 
             <Button

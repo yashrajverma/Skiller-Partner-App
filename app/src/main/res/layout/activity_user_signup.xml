@@ -24,8 +24,8 @@
 
     <ScrollView
         android:layout_width="match_parent"
-        android:scrollIndicators="none"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:scrollIndicators="none">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -33,6 +33,7 @@
             android:layout_marginTop="20dp"
             android:orientation="vertical">
 
+            <!--Name-->
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/register_name"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
@@ -54,6 +55,7 @@
 
             </com.google.android.material.textfield.TextInputLayout>
 
+            <!--Email-->
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/register_email"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
@@ -75,6 +77,7 @@
 
             </com.google.android.material.textfield.TextInputLayout>
 
+            <!--Password-->
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/register_password"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
@@ -97,6 +100,7 @@
 
             </com.google.android.material.textfield.TextInputLayout>
 
+            <!--Mobile Number-->
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/register_phone"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
@@ -138,6 +142,7 @@
             <Button
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:id="@+id/login_btn"
                 android:layout_marginTop="20dp"
                 android:background="@color/colorPrimaryDark"
                 android:elevation="5dp"
