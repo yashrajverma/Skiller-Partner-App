@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.os.Build;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,6 +13,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -20,13 +22,21 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.yashraj.skillerpartnerapp.Model.NewTask;
 import com.yashraj.skillerpartnerapp.R;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+@RequiresApi(api = Build.VERSION_CODES.O)
 public class NewTaskAdapter extends RecyclerView.Adapter<NewTaskAdapter.ViewHolder> {
     Context mContext;
     ArrayList<NewTask> mNewTaskList;
     FirebaseUser firebaseUser;
+
+    ////// To Get current date ///////////
+    LocalDate dateObj = LocalDate.now();
+    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+    String date = dateObj.format(formatter);
 
     public NewTaskAdapter(Context mContext, ArrayList<NewTask> mNewTaskList) {
         this.mContext = mContext;
@@ -59,7 +69,7 @@ public class NewTaskAdapter extends RecyclerView.Adapter<NewTaskAdapter.ViewHold
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         FirebaseDatabase.getInstance().getReference().child("NewTask").child(firebaseUser.getUid()).child("Tasks").child(task.getWorkId()).child("accepted").setValue("yes");
-                        addOngoingTask(task.getVendorId(), task.getWorkId(), task.getLocation());
+                        addOngoingTask(firebaseUser.getUid(), task.getWorkId(), task.getLocation(), date, "No");
                         Toast.makeText(mContext, "Task Accepted successfully", Toast.LENGTH_SHORT).show();
                         holder.acceptButton.setText("Accepted");
 
@@ -73,11 +83,13 @@ public class NewTaskAdapter extends RecyclerView.Adapter<NewTaskAdapter.ViewHold
 
     }
 
-    private void addOngoingTask(String vendorId, String workId, String location) {
+    private void addOngoingTask(String vendorId, String workId, String location, String date, String completed) {
         HashMap<String, Object> map = new HashMap<>();
         map.put("workId", workId);
         map.put("vendorId", vendorId);
         map.put("location", location);
+        map.put("startingDate", date);
+        map.put("completed", completed);
         FirebaseDatabase.getInstance().getReference().child("OngoingTask").child(firebaseUser.getUid()).child("Ongoing").child(workId).setValue(map);
     }
 
@@ -87,7 +99,7 @@ public class NewTaskAdapter extends RecyclerView.Adapter<NewTaskAdapter.ViewHold
         return mNewTaskList.size();
     }
 
-    class ViewHolder extends RecyclerView.ViewHolder {
+    static class ViewHolder extends RecyclerView.ViewHolder {
         TextView description;
         View view;
         TextView location;

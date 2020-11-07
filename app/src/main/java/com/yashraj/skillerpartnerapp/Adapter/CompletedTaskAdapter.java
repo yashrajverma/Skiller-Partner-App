@@ -15,8 +15,8 @@ import com.yashraj.skillerpartnerapp.R;
 import java.util.ArrayList;
 
 public class CompletedTaskAdapter extends RecyclerView.Adapter<CompletedTaskAdapter.ViewHolder> {
-    private Context mContext;
-    private ArrayList<CompletedTask> cTaskList;
+    private final Context mContext;
+    private final ArrayList<CompletedTask> cTaskList;
 
     public CompletedTaskAdapter(Context mContext, ArrayList<CompletedTask> cTaskList) {
         this.mContext = mContext;
@@ -36,7 +36,7 @@ public class CompletedTaskAdapter extends RecyclerView.Adapter<CompletedTaskAdap
         holder.cLocation.setText(task.getLocation());
         holder.cStartingDate.setText(task.getStartingDate());
         holder.cEndingDate.setText(task.getEndingDate());
-        holder.cAmount.setText(task.getPayment());
+//        holder.cAmount.setText(task.getPayment());
 
     }
 
@@ -45,14 +45,14 @@ public class CompletedTaskAdapter extends RecyclerView.Adapter<CompletedTaskAdap
         return cTaskList.size();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder {
+    public static class ViewHolder extends RecyclerView.ViewHolder {
         public TextView cLocation;
         public TextView cStartedOn;
         public TextView cStartingDate;
         public TextView cEndOn;
         public TextView cEndingDate;
-        public TextView cPayment;
-        public TextView cAmount;
+//        public TextView cPayment;
+//        public TextView cAmount;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -61,8 +61,8 @@ public class CompletedTaskAdapter extends RecyclerView.Adapter<CompletedTaskAdap
             cStartingDate = itemView.findViewById(R.id.c_starting_date);
             cEndOn = itemView.findViewById(R.id.c_ended_on);
             cEndingDate = itemView.findViewById(R.id.c_ending_date);
-            cPayment = itemView.findViewById(R.id.c_payment_received);
-            cAmount = itemView.findViewById(R.id.c_amount);
+//            cPayment = itemView.findViewById(R.id.c_payment_received);
+//            cAmount = itemView.findViewById(R.id.c_amount);
         }
     }
 }
