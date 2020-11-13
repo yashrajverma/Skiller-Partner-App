@@ -69,7 +69,7 @@ public class OngoingTaskAdapter extends RecyclerView.Adapter<OngoingTaskAdapter.
             @Override
             public void onClick(View v) {
                 if (clicked) {
-                    addCompletedTask(task.getWorkId(), task.getStartingDate(), task.getEndingDate(), task.getLocation(), task.getVendorId());
+                    addCompletedTask(task.getWorkId(), task.getStartingDate(), task.getEndingDate(), task.getLocation(), task.getVendorId(), task.getCharges(), task.getVendorName(), task.getDescription());
                     holder.markCompleteBtn.setText("Completed");
                     Handler handler = new Handler();
                     handler.postDelayed(new Runnable() {
@@ -109,13 +109,17 @@ public class OngoingTaskAdapter extends RecyclerView.Adapter<OngoingTaskAdapter.
         datePickerDialog.show();
     }
 
-    private void addCompletedTask(String workId, String startingDate, String endingDate, String location, String vendorId) {
+    private void addCompletedTask(String workId, String startingDate, String endingDate, String location, String vendorId, int charges, String vendorName, String description) {
         HashMap<String, Object> map = new HashMap<>();
         map.put("location", location);
         map.put("startingDate", startingDate);
         map.put("endingDate", endingDate);
         map.put("workId", workId);
         map.put("vendorId", vendorId);
+        map.put("charges", charges);
+        map.put("vendorName", vendorName);
+        map.put("description", description);
+
         FirebaseDatabase.getInstance().getReference().child("CompletedTask").child(mUser.getUid()).child("Completed").child(workId).setValue(map);
     }
 

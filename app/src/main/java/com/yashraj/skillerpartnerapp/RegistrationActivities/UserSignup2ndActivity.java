@@ -33,7 +33,7 @@ import java.util.Locale;
 public class UserSignup2ndActivity extends AppCompatActivity implements LocationListener {
     TextView titleText;
     Button next, showLocation;
-    EditText state, city;
+    EditText amount, state, city;
     RadioButton selectedGender;
     RadioGroup radioGroup;
     LocationManager locationManager;
@@ -48,6 +48,7 @@ public class UserSignup2ndActivity extends AppCompatActivity implements Location
 
         //////// Hooks //////////////////
         titleText = findViewById(R.id.register_title_text);
+        amount = findViewById(R.id.amount);
         next = findViewById(R.id.register_next_button);
         state = findViewById(R.id.register_state);
         city = findViewById(R.id.register_city);
@@ -81,7 +82,7 @@ public class UserSignup2ndActivity extends AppCompatActivity implements Location
     }
 
     public void callNextSignupScreen(View view) {
-        if (!validateGender() | !validateState() | !validateCity()) {
+        if (!validateGender() | !validateState() | !validateCity() | !validateAmount()) {
             return;
         }
         String getName = getIntent().getStringExtra("name");
@@ -92,6 +93,8 @@ public class UserSignup2ndActivity extends AppCompatActivity implements Location
         String getGender = selectedGender.getText().toString();
         String getState = state.getText().toString().trim();
         String getCity = city.getText().toString().trim();
+        String charges = amount.getText().toString().trim();
+        int getCharges = Integer.parseInt(charges);
         Intent intent = new Intent(getApplicationContext(), UserSignup3rdActivity.class);
         Pair[] pairs = new Pair[2];
         pairs[0] = new Pair<View, String>(titleText, "transition_title_text");
@@ -104,6 +107,7 @@ public class UserSignup2ndActivity extends AppCompatActivity implements Location
         intent.putExtra("gender", getGender);
         intent.putExtra("state", getState);
         intent.putExtra("city", getCity);
+        intent.putExtra("charges", getCharges);
         startActivity(intent, options.toBundle());
 
     }
@@ -115,6 +119,21 @@ public class UserSignup2ndActivity extends AppCompatActivity implements Location
         } else {
             return true;
         }
+    }
+
+    private boolean validateAmount() {
+        String value = amount.getText().toString().trim();
+        int charges = Integer.parseInt(value);
+        if (charges < 100) {
+            amount.setError("Min charges must be 100Rs");
+            return false;
+
+        } else {
+            amount.setError(null);
+            return true;
+
+        }
+
     }
 
     private boolean validateState() {

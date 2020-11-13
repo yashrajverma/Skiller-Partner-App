@@ -34,6 +34,7 @@ public class PhoneAuthenticationActivity extends AppCompatActivity {
     PinView pin;
     String codeBySystem;
     String userName, userEmail, userPassword, userGender, userState, userCity, userOccupation, userPhone;
+    Integer userCharges;
     private FirebaseAuth mAuth;
 
 
@@ -92,6 +93,7 @@ public class PhoneAuthenticationActivity extends AppCompatActivity {
         userState = getIntent().getStringExtra("state");
         userCity = getIntent().getStringExtra("city");
         userOccupation = getIntent().getStringExtra("occupation");
+        userCharges = getIntent().getIntExtra("charges", 100);
         userPhone = getIntent().getStringExtra("phone");
         phoneNumber.setText(userPhone);
 
@@ -139,7 +141,7 @@ public class PhoneAuthenticationActivity extends AppCompatActivity {
     private void storeNewUserData() {
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference reference = database.getReference("Vendors");
-        Vendor addNewUser = new Vendor(userName, userEmail, userPassword, userGender, userState, userCity, userOccupation, userPhone, "default");
+        Vendor addNewUser = new Vendor(userName, userEmail, userPassword, userGender, userState, userCity, userOccupation, userPhone, "default", userCharges);
         reference.child(mAuth.getCurrentUser().getUid()).setValue(addNewUser).addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
             public void onComplete(@NonNull Task<Void> task) {

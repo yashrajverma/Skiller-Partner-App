@@ -20,6 +20,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.FirebaseDatabase;
 import com.yashraj.skillerpartnerapp.Model.NewTask;
+import com.yashraj.skillerpartnerapp.Model.Vendor;
 import com.yashraj.skillerpartnerapp.R;
 
 import java.time.LocalDate;
@@ -56,6 +57,7 @@ public class NewTaskAdapter extends RecyclerView.Adapter<NewTaskAdapter.ViewHold
     @Override
     public void onBindViewHolder(@NonNull final ViewHolder holder, int position) {
         firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
+        final Vendor vendor = new Vendor();
         final NewTask task = mNewTaskList.get(position);
         holder.description.setText(task.getDescription());
         holder.location.setText(task.getLocation());
@@ -69,7 +71,7 @@ public class NewTaskAdapter extends RecyclerView.Adapter<NewTaskAdapter.ViewHold
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         FirebaseDatabase.getInstance().getReference().child("NewTask").child(firebaseUser.getUid()).child("Tasks").child(task.getWorkId()).child("accepted").setValue("yes");
-                        addOngoingTask(firebaseUser.getUid(), task.getWorkId(), task.getLocation(), date, "No");
+                        addOngoingTask(firebaseUser.getUid(), task.getWorkId(), task.getLocation(), date, "No", task.getDescription(), vendor.getName(), vendor.getCharges());
                         Toast.makeText(mContext, "Task Accepted successfully", Toast.LENGTH_SHORT).show();
                         holder.acceptButton.setText("Accepted");
 
@@ -83,13 +85,17 @@ public class NewTaskAdapter extends RecyclerView.Adapter<NewTaskAdapter.ViewHold
 
     }
 
-    private void addOngoingTask(String vendorId, String workId, String location, String date, String completed) {
+    private void addOngoingTask(String vendorId, String workId, String location, String date, String completed, String description, String vendorName, int vendorCharges) {
         HashMap<String, Object> map = new HashMap<>();
         map.put("workId", workId);
         map.put("vendorId", vendorId);
         map.put("location", location);
         map.put("startingDate", date);
         map.put("completed", completed);
+        map.put("description", description);
+        map.put("vendorName", vendorName);
+        map.put("charges", vendorCharges);
+
         FirebaseDatabase.getInstance().getReference().child("OngoingTask").child(firebaseUser.getUid()).child("Ongoing").child(workId).setValue(map);
     }
 

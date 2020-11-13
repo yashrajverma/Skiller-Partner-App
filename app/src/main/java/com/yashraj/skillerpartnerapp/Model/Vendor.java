@@ -1,13 +1,14 @@
 package com.yashraj.skillerpartnerapp.Model;
 
 public class Vendor {
-    String Name, Email, Password, Gender, State, City, Occupation, PhoneNo, imageUrl;
+    String Name, Email, Password, Gender, State, City, Occupation, PhoneNo, ImageUrl;
+    int Charges;
 
     public Vendor() {
     }
 
 
-    public Vendor(String name, String email, String password, String gender, String state, String city, String occupation, String phoneNo, String imageUrl) {
+    public Vendor(String name, String email, String password, String gender, String state, String city, String occupation, String phoneNo, String imageUrl, int charges) {
         Name = name;
         Email = email;
         Password = password;
@@ -16,7 +17,8 @@ public class Vendor {
         City = city;
         Occupation = occupation;
         PhoneNo = phoneNo;
-        this.imageUrl = imageUrl;
+        this.Charges = charges;
+        this.ImageUrl = imageUrl;
     }
 
     public String getName() {
@@ -84,10 +86,18 @@ public class Vendor {
     }
 
     public String getImageUrl() {
-        return imageUrl;
+        return ImageUrl;
     }
 
     public void setImageUrl(String imageUrl) {
-        this.imageUrl = imageUrl;
+        this.ImageUrl = imageUrl;
+    }
+
+    public int getCharges() {
+        return Charges;
+    }
+
+    public void setCharges(int charges) {
+        this.Charges = charges;
     }
 }

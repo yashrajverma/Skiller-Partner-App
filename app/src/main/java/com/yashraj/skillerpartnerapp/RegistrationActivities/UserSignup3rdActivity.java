@@ -45,6 +45,9 @@ public class UserSignup3rdActivity extends AppCompatActivity {
         String getPhone = getIntent().getStringExtra("phone");
         String getAge = getIntent().getStringExtra("age");
         String getGender = getIntent().getStringExtra("gender");
+        String getState = getIntent().getStringExtra("state");
+        String getCity = getIntent().getStringExtra("city");
+        Integer getCharges = getIntent().getIntExtra("charges", 100);
 
         Intent intent = new Intent(getApplicationContext(), PhoneAuthenticationActivity.class);
         Pair[] pairs = new Pair[2];
@@ -58,6 +61,9 @@ public class UserSignup3rdActivity extends AppCompatActivity {
         intent.putExtra("age", getAge);
         intent.putExtra("gender", getGender);
         intent.putExtra("occupation", skill);
+        intent.putExtra("state", getState);
+        intent.putExtra("city", getCity);
+        intent.putExtra("charges", getCharges);
         startActivity(intent, options.toBundle());
 
     }
