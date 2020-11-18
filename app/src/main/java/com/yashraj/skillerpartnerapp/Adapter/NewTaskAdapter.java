@@ -18,7 +18,10 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.yashraj.skillerpartnerapp.Model.NewTask;
 import com.yashraj.skillerpartnerapp.Model.Vendor;
 import com.yashraj.skillerpartnerapp.R;
@@ -33,6 +36,7 @@ public class NewTaskAdapter extends RecyclerView.Adapter<NewTaskAdapter.ViewHold
     Context mContext;
     ArrayList<NewTask> mNewTaskList;
     FirebaseUser firebaseUser;
+
 
     ////// To Get current date ///////////
     LocalDate dateObj = LocalDate.now();
@@ -57,8 +61,8 @@ public class NewTaskAdapter extends RecyclerView.Adapter<NewTaskAdapter.ViewHold
     @Override
     public void onBindViewHolder(@NonNull final ViewHolder holder, int position) {
         firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
-        final Vendor vendor = new Vendor();
         final NewTask task = mNewTaskList.get(position);
+
         holder.description.setText(task.getDescription());
         holder.location.setText(task.getLocation());
         holder.phoneNumber.setText(task.getPhoneNo());
@@ -70,8 +74,13 @@ public class NewTaskAdapter extends RecyclerView.Adapter<NewTaskAdapter.ViewHold
                 new AlertDialog.Builder(mContext).setMessage("Are you sure to accept this work?").setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
+                        ///// To change the value of accepted to 'Yes' ///////
                         FirebaseDatabase.getInstance().getReference().child("NewTask").child(firebaseUser.getUid()).child("Tasks").child(task.getWorkId()).child("accepted").setValue("yes");
-                        addOngoingTask(firebaseUser.getUid(), task.getWorkId(), task.getLocation(), date, "No", task.getDescription(), vendor.getName(), vendor.getCharges());
+                        ///// to get user's location ////////
+                        String location = task.getAddress() + "," + task.getLocation();
+                        addOngoingTask(firebaseUser.getUid(), task.getWorkId(), location, date, "No", task.getDescription(), task.getCharges());
+                        ////// to get vendor's name //////////
+                        getVendorsData(task.getWorkId());
                         Toast.makeText(mContext, "Task Accepted successfully", Toast.LENGTH_SHORT).show();
                         holder.acceptButton.setText("Accepted");
 
@@ -85,7 +94,26 @@ public class NewTaskAdapter extends RecyclerView.Adapter<NewTaskAdapter.ViewHold
 
     }
 
-    private void addOngoingTask(String vendorId, String workId, String location, String date, String completed, String description, String vendorName, int vendorCharges) {
+    ///////Method to get Vendor's data ///////////
+    private void getVendorsData(final String workId) {
+        FirebaseDatabase.getInstance().getReference().child("Vendors").child(firebaseUser.getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                Vendor vendor = snapshot.getValue(Vendor.class);
+
+                FirebaseDatabase.getInstance().getReference().child("OngoingTask").child(firebaseUser.getUid()).child("Ongoing").child(workId).child("vendorName").setValue(vendor.getName());
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+    }
+
+    /////// Method to send data in the Ongoing task ///////////////
+    private void addOngoingTask(String vendorId, String workId, String location, String date, String completed, String description, long vendorCharges) {
+
         HashMap<String, Object> map = new HashMap<>();
         map.put("workId", workId);
         map.put("vendorId", vendorId);
@@ -93,7 +121,6 @@ public class NewTaskAdapter extends RecyclerView.Adapter<NewTaskAdapter.ViewHold
         map.put("startingDate", date);
         map.put("completed", completed);
         map.put("description", description);
-        map.put("vendorName", vendorName);
         map.put("charges", vendorCharges);
 
         FirebaseDatabase.getInstance().getReference().child("OngoingTask").child(firebaseUser.getUid()).child("Ongoing").child(workId).setValue(map);

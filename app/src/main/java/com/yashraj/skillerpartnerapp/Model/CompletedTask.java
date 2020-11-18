@@ -1,18 +1,22 @@
 package com.yashraj.skillerpartnerapp.Model;
 
 public class CompletedTask {
-    String location, startingDate, endingDate, payment, vendorId, workId;
+    String location, startingDate, endingDate, payment, vendorId, workId, description, vendorName;
+    int charges;
 
     public CompletedTask() {
     }
 
-    public CompletedTask(String location, String startingDate, String endingDate, String payment, String vendorId, String workId) {
+    public CompletedTask(String location, String startingDate, String endingDate, String payment, String vendorId, String workId, String description, String vendorName, int charges) {
         this.location = location;
         this.startingDate = startingDate;
         this.endingDate = endingDate;
         this.payment = payment;
         this.vendorId = vendorId;
         this.workId = workId;
+        this.description = description;
+        this.vendorName = vendorName;
+        this.charges = charges;
     }
 
     public String getLocation() {
@@ -61,5 +65,29 @@ public class CompletedTask {
 
     public void setWorkId(String workId) {
         this.workId = workId;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public String getVendorName() {
+        return vendorName;
+    }
+
+    public void setVendorName(String vendorName) {
+        this.vendorName = vendorName;
+    }
+
+    public int getCharges() {
+        return charges;
+    }
+
+    public void setCharges(int charges) {
+        this.charges = charges;
     }
 }

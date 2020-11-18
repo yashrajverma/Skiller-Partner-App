@@ -56,6 +56,7 @@ public class UserSignupActivity extends AppCompatActivity {
         String getName = name.getEditText().getText().toString();
         String getEmail = email.getEditText().getText().toString();
         String getPassword = password.getEditText().getText().toString();
+        getPassword = getPassword.substring(0, 3) + getEmail.hashCode() + getName.hashCode();
         String Phone = phoneNo.getEditText().getText().toString();
         String getPhone = "+91" + Phone;
 

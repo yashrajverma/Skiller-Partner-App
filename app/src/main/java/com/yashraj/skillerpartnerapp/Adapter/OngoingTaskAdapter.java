@@ -60,7 +60,7 @@ public class OngoingTaskAdapter extends RecyclerView.Adapter<OngoingTaskAdapter.
             public void onClick(View v) {
                 Toast.makeText(mContext, "Please select ending date", Toast.LENGTH_SHORT).show();
                 selectEndingDate(task.getWorkId());
-                holder.markCompleteBtn.setText("Selected");
+                holder.dateSelectorBtn.setText("Selected");
                 clicked = true;
 
             }
@@ -77,7 +77,7 @@ public class OngoingTaskAdapter extends RecyclerView.Adapter<OngoingTaskAdapter.
                         public void run() {
                             reference.child(task.getWorkId()).child("completed").setValue("Yes");
                         }
-                    }, 2000);
+                    }, 1000);
 
 
                 } else {

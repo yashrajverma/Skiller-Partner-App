@@ -131,10 +131,11 @@ public class EditProfile extends AppCompatActivity {
             public void onClick(View v) {
                 Vendor vendor = new Vendor();
                 newPassword = password.getText().toString();
+                int password = newPassword.hashCode();
                 if (!validatePassword()) {
                     Toast.makeText(EditProfile.this, "Invalid Password", Toast.LENGTH_SHORT).show();
                 } else {
-                    FirebaseDatabase.getInstance().getReference().child("Vendors").child(mUser.getUid()).child("password").setValue(newPassword);
+                    FirebaseDatabase.getInstance().getReference().child("Vendors").child(mUser.getUid()).child("password").setValue(String.valueOf(password));
                     Picasso.get().load(vendor.getImageUrl()).placeholder(R.drawable.ic_baseline_account_circle_24).into(image);
                     Toast.makeText(EditProfile.this, "Profile Updated", Toast.LENGTH_SHORT).show();
 
@@ -207,6 +208,7 @@ public class EditProfile extends AppCompatActivity {
                 email.setText(vendor.getEmail());
                 password.setText(vendor.getPassword());
                 mobile.setText(vendor.getPhoneNo());
+                city.setText(vendor.getCity());
 
             }
 
