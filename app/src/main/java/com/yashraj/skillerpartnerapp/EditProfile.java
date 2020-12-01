@@ -18,8 +18,10 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.android.gms.tasks.Continuation;
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -28,7 +30,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
-import com.google.firebase.storage.UploadTask;
+import com.google.firebase.storage.StorageTask;
 import com.karumi.dexter.Dexter;
 import com.karumi.dexter.PermissionToken;
 import com.karumi.dexter.listener.PermissionDeniedResponse;
@@ -54,6 +56,7 @@ public class EditProfile extends AppCompatActivity {
     FirebaseUser mUser;
     Uri filePath;
     Bitmap bitmap;
+    String imageUrl;
     String newPassword;
     boolean imageSelected;
 
@@ -136,7 +139,7 @@ public class EditProfile extends AppCompatActivity {
                     Toast.makeText(EditProfile.this, "Invalid Password", Toast.LENGTH_SHORT).show();
                 } else {
                     FirebaseDatabase.getInstance().getReference().child("Vendors").child(mUser.getUid()).child("password").setValue(String.valueOf(password));
-                    Picasso.get().load(vendor.getImageUrl()).placeholder(R.drawable.ic_baseline_account_circle_24).into(image);
+                    uploadToFirebase();
                     Toast.makeText(EditProfile.this, "Profile Updated", Toast.LENGTH_SHORT).show();
 
                 }
@@ -150,7 +153,7 @@ public class EditProfile extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == 101 && resultCode == RESULT_OK) {
+        if (requestCode == 101 && resultCode == RESULT_OK && data != null) {
             filePath = data.getData();
             try {
                 InputStream inputStream = getContentResolver().openInputStream(filePath);
@@ -169,22 +172,34 @@ public class EditProfile extends AppCompatActivity {
 
     private void uploadToFirebase() {
         final ProgressDialog pd = new ProgressDialog(this);
-        pd.setMessage("Uploading");
+        pd.setMessage("Updating...");
         pd.show();
         FirebaseStorage storage = FirebaseStorage.getInstance();
-        final StorageReference uploader = storage.getReference().child("VendorsImg").child(mUser.getUid().substring(0, 8) + "." + getFileExtension(filePath));
-        uploader.putFile(filePath).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+        final StorageReference reference = storage.getReference().child("VendorsImg").child(mUser.getUid().substring(0, 8) + "." + getFileExtension(filePath));
+        StorageTask uploadTask = reference.putFile(filePath);
+        uploadTask.continueWithTask(new Continuation() {
             @Override
-            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+            public Object then(@NonNull Task task) throws Exception {
+                if (!task.isSuccessful()) {
+                    throw task.getException();
+                }
+                return reference.getDownloadUrl();
+            }
+        }).addOnCompleteListener(new OnCompleteListener() {
+            @Override
+            public void onComplete(@NonNull Task task) {
+                Uri downloadUri = (Uri) task.getResult();
+                imageUrl = downloadUri.toString();
+
+                FirebaseDatabase.getInstance().getReference().child("Vendors").child(mUser.getUid()).child("imageUrl").setValue(imageUrl);
                 pd.dismiss();
                 Toast.makeText(EditProfile.this, "Image Uploaded", Toast.LENGTH_SHORT).show();
-                FirebaseDatabase.getInstance().getReference().child("Vendors").child(mUser.getUid()).child("imageUrl").setValue(uploader.getDownloadUrl().toString());
+
 
             }
         }).addOnFailureListener(new OnFailureListener() {
             @Override
             public void onFailure(@NonNull Exception e) {
-                pd.dismiss();
                 Toast.makeText(EditProfile.this, e.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
@@ -209,6 +224,11 @@ public class EditProfile extends AppCompatActivity {
                 password.setText(vendor.getPassword());
                 mobile.setText(vendor.getPhoneNo());
                 city.setText(vendor.getCity());
+                if (!vendor.getImageUrl().equals("default")) {
+                    Picasso.get().load(vendor.getImageUrl()).placeholder(R.drawable.ic_baseline_account_circle_24).into(image);
+                } else {
+                    image.setImageResource(R.drawable.ic_baseline_account_circle_24);
+                }
 
             }
 
