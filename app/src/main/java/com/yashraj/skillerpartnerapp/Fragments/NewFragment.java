@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -29,6 +30,7 @@ public class NewFragment extends Fragment {
     NewTaskAdapter newTaskAdapter;
     ArrayList<NewTask> taskList;
     TextView textView;
+    ProgressBar pb;
     FirebaseAuth mAuth = FirebaseAuth.getInstance();
 
 
@@ -39,7 +41,7 @@ public class NewFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_new, container, false);
         textView = view.findViewById(R.id.no_task_text);
-
+        pb = view.findViewById(R.id.progressBar);
         newTaskRecyclerView = view.findViewById(R.id.new_task);
         taskList = new ArrayList<>();
         newTaskAdapter = new NewTaskAdapter(getContext(), taskList);
@@ -48,11 +50,16 @@ public class NewFragment extends Fragment {
 
         readTasks();
 
+
         return view;
     }
 
     /////// To Fetch details in CardView from the firebase /////////////
     private void readTasks() {
+//        final ProgressDialog pd = new ProgressDialog(getContext());
+////        pd.setMessage("Loading...");
+//        pd.show();
+        pb.setVisibility(View.VISIBLE);
         FirebaseDatabase.getInstance().getReference().child("NewTask").child(mAuth.getCurrentUser().getUid()).child("Tasks")
                 .addValueEventListener(new ValueEventListener() {
                     @Override
@@ -61,6 +68,11 @@ public class NewFragment extends Fragment {
                         for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
                             NewTask task = dataSnapshot.getValue(NewTask.class);
                             assert task != null;
+                            if (taskList.isEmpty()) {
+                                textView.setVisibility(View.VISIBLE);
+                            } else {
+                                textView.setVisibility(View.GONE);
+                            }
                             if (task.getAccepted().equals("yes")) {
                                 taskList.remove(task);
                             } else {
@@ -74,6 +86,7 @@ public class NewFragment extends Fragment {
 
                         }
                         newTaskAdapter.notifyDataSetChanged();
+                        pb.setVisibility(View.GONE);
 
 
                     }

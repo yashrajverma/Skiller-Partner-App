@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -25,6 +26,7 @@ import java.util.ArrayList;
 
 public class OngoingFragment extends Fragment {
     TextView noTasks;
+    ProgressBar pb;
     RecyclerView onGoingTask;
     ArrayList<OngoingTask> ongoingTaskList;
     OngoingTaskAdapter taskAdapter;
@@ -37,6 +39,7 @@ public class OngoingFragment extends Fragment {
 
         View view = inflater.inflate(R.layout.fragment_ongoing, container, false);
         mAuth = FirebaseAuth.getInstance();
+        pb = view.findViewById(R.id.progressBar);
         onGoingTask = view.findViewById(R.id.ongoing_task);
         noTasks = view.findViewById(R.id.no_ongoingTask_text);
         onGoingTask.setLayoutManager(new LinearLayoutManager(getContext()));
@@ -50,6 +53,7 @@ public class OngoingFragment extends Fragment {
 
     /////// To fetch details in CardView from the firebase ///////
     private void readOngoingTasks() {
+        pb.setVisibility(View.VISIBLE);
         FirebaseDatabase.getInstance().getReference().child("OngoingTask").child(mAuth.getCurrentUser().getUid()).child("Ongoing")
                 .addValueEventListener(new ValueEventListener() {
                     @Override
@@ -69,6 +73,7 @@ public class OngoingFragment extends Fragment {
                                 noTasks.setVisibility(View.VISIBLE);
                             }
                         }
+                        pb.setVisibility(View.GONE);
                         taskAdapter.notifyDataSetChanged();
 
                     }
