@@ -55,12 +55,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:cursorVisible="true"
-        android:inputType="number"
-        app:hideLineWhenFilled="false"
         android:layout_marginHorizontal="20dp"
         android:layout_marginTop="10dp"
+        android:cursorVisible="true"
         android:gravity="center"
+        android:inputType="number"
+        app:hideLineWhenFilled="false"
         app:itemCount="6">
 
     </com.chaos.view.PinView>

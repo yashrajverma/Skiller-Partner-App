@@ -6,12 +6,53 @@
     android:orientation="vertical"
     tools:context=".RegistrationActivities.UserLoginActivity">
 
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="10dp"
+        android:fontFamily="@font/roboto_medium"
+        android:gravity="center"
+        android:text="Code Verification"
+        android:textColor="@color/colorPrimaryDark"
+        android:textSize="30sp">
+
+    </TextView>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="10dp"
+        android:fontFamily="@font/roboto"
+        android:gravity="center"
+        android:text="Enter the code sent to your mobile number "
+        android:textColor="@color/colorPrimaryDark"
+        android:textSize="16sp">
+
+    </TextView>
+
+    <TextView
+        android:id="@+id/phoneNumber"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="10dp"
+        android:fontFamily="@font/roboto_medium"
+        android:gravity="center"
+        android:text="9917068314"
+        android:textColor="#009688"
+        android:textSize="20sp">
+
+    </TextView>
+
+
     <EditText
         android:id="@+id/otp"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="20dp"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="20dp"
         android:background="@drawable/edit_text_background"
         android:drawableStart="@drawable/ic_lock"
         android:drawablePadding="3dp"

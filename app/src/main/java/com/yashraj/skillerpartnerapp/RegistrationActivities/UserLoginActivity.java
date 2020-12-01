@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -25,6 +26,7 @@ import java.util.concurrent.TimeUnit;
 
 public class UserLoginActivity extends AppCompatActivity {
     EditText otp;
+    TextView phone;
     Button login;
     String phoneNumber;
     String codeBySystem;
@@ -58,8 +60,10 @@ public class UserLoginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_user_login);
         login = findViewById(R.id.btn_login);
         otp = findViewById(R.id.otp);
+        phone = findViewById(R.id.phoneNumber);
         mAuth = FirebaseAuth.getInstance();
         phoneNumber = getIntent().getStringExtra("phone");
+        phone.setText(phoneNumber);
 
         sendOTP();
 
