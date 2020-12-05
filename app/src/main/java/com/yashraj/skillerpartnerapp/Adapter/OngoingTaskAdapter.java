@@ -33,7 +33,7 @@ public class OngoingTaskAdapter extends RecyclerView.Adapter<OngoingTaskAdapter.
     private final Context mContext;
     private final FirebaseUser mUser;
     boolean clicked = false;
-    private DatabaseReference reference;
+    DatabaseReference reference;
 
     public OngoingTaskAdapter(ArrayList<OngoingTask> dataHolder, Context mContext) {
         this.dataHolder = dataHolder;
@@ -91,6 +91,7 @@ public class OngoingTaskAdapter extends RecyclerView.Adapter<OngoingTaskAdapter.
 
     }
 
+
     private void selectEndingDate(final String workId) {
         Calendar cal = Calendar.getInstance(TimeZone.getDefault());
         int mYear = cal.get(Calendar.YEAR);
@@ -121,6 +122,7 @@ public class OngoingTaskAdapter extends RecyclerView.Adapter<OngoingTaskAdapter.
         map.put("description", description);
 
         FirebaseDatabase.getInstance().getReference().child("CompletedTask").child(mUser.getUid()).child("Completed").child(workId).setValue(map);
+        FirebaseDatabase.getInstance().getReference().child("CompletedTask").child("orderHistory").child(workId).setValue(map);
     }
 
 

@@ -47,6 +47,8 @@ public class NewFragment extends Fragment {
         newTaskAdapter = new NewTaskAdapter(getContext(), taskList);
         newTaskRecyclerView.setAdapter(newTaskAdapter);
         newTaskRecyclerView.setLayoutManager(new LinearLayoutManager(view.getContext()));
+        textView.setVisibility(View.VISIBLE);
+
 
         readTasks();
 
@@ -59,11 +61,13 @@ public class NewFragment extends Fragment {
 //        final ProgressDialog pd = new ProgressDialog(getContext());
 ////        pd.setMessage("Loading...");
 //        pd.show();
+
         pb.setVisibility(View.VISIBLE);
         FirebaseDatabase.getInstance().getReference().child("NewTask").child(mAuth.getCurrentUser().getUid()).child("Tasks")
                 .addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        textView.setVisibility(View.VISIBLE);
                         taskList.clear();
                         for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
                             NewTask task = dataSnapshot.getValue(NewTask.class);

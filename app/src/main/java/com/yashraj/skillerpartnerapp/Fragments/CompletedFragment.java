@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -24,6 +25,7 @@ import java.util.ArrayList;
 
 
 public class CompletedFragment extends Fragment {
+    TextView textView;
     RecyclerView cTaskView;
     ArrayList<CompletedTask> cTaskList;
     CompletedTaskAdapter taskAdapter;
@@ -36,6 +38,7 @@ public class CompletedFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_completed, container, false);
         cTaskView = view.findViewById(R.id.completed_task);
+        textView = view.findViewById(R.id.c_textView);
         mUser = FirebaseAuth.getInstance().getCurrentUser();
         cTaskView.setLayoutManager(new LinearLayoutManager(getContext()));
         cTaskList = new ArrayList<>();
@@ -52,10 +55,14 @@ public class CompletedFragment extends Fragment {
                 .addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        textView.setVisibility(View.VISIBLE);
                         cTaskList.clear();
                         for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
                             CompletedTask task = dataSnapshot.getValue(CompletedTask.class);
                             cTaskList.add(task);
+                            if (!cTaskList.isEmpty()) {
+                                textView.setVisibility(View.GONE);
+                            }
                         }
                         taskAdapter.notifyDataSetChanged();
                     }

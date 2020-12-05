@@ -58,6 +58,7 @@ public class OngoingFragment extends Fragment {
                 .addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        noTasks.setVisibility(View.VISIBLE);
                         ongoingTaskList.clear();
                         for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
                             OngoingTask task = dataSnapshot.getValue(OngoingTask.class);
